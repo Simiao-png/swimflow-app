@@ -2270,3 +2270,82 @@ CORREÇÃO FINAL MOBILE - DETALHE DO TREINO
 
     color: white;
 }
+
+.historico-wrapper{
+    overflow-x: auto;
+}
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+.pagina-auth{
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(1, 10, 30, 0.72),
+            rgba(1, 10, 30, 0.82)
+        ),
+        url("img/piscina-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-container{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.auth-card{
+    width: 100%;
+    max-width: 420px;
+
+    background: rgba(26, 39, 64, 0.96);
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(0, 191, 255, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.auth-card h1{
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 34px;
+}
+
+.auth-card p{
+    margin: 0;
+
+    text-align: center;
+
+    color: #9bb4d4;
+}
+
+.link-auth{
+    color: #00bfff;
+
+    text-align: center;
+
+    font-weight: bold;
+}

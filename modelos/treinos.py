@@ -1,7 +1,16 @@
+# ============================================================
+# IMPORTAÇÕES
+# ============================================================
+
 from database.connection import conectar
 
 
+# ============================================================
+# CADASTRAR TREINO
+# ============================================================
+
 def cadastrar_treino(
+    usuario_id,
     data_treino,
     titulo,
     estilo,
@@ -12,7 +21,7 @@ def cadastrar_treino(
     pace,
     observacoes,
     equipamentos,
-    status="realizado"
+    status="realizado",
 ):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -30,9 +39,10 @@ def cadastrar_treino(
             pace,
             observacoes,
             equipamentos,
-            status
+            status,
+            usuario_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
     valores = (
@@ -46,7 +56,8 @@ def cadastrar_treino(
         pace,
         observacoes,
         equipamentos,
-        status
+        status,
+        usuario_id
     )
 
     cursor.execute(sql, valores)
@@ -56,16 +67,21 @@ def cadastrar_treino(
     conexao.close()
 
 
-def listar_treinos():
+# ============================================================
+# LISTAR / BUSCAR TREINOS
+# ============================================================
+
+def listar_treinos(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
     sql = """
         SELECT * FROM treinos
+        WHERE usuario_id = %s
         ORDER BY data_treino DESC
     """
 
-    cursor.execute(sql)
+    cursor.execute(sql, (usuario_id,))
     treinos = cursor.fetchall()
 
     cursor.close()
@@ -91,6 +107,10 @@ def buscar_treino_por_id(id):
 
     return treino
 
+
+# ============================================================
+# ATUALIZAR / EXCLUIR TREINOS
+# ============================================================
 
 def atualizar_treino(
     id,
@@ -164,7 +184,11 @@ def excluir_treino_por_id(id):
     conexao.close()
 
 
-def buscar_resumo():
+# ============================================================
+# RESUMO DOS TREINOS
+# ============================================================
+
+def buscar_resumo(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
@@ -175,9 +199,10 @@ def buscar_resumo():
             COALESCE(SUM(duracao_minutos), 0) AS tempo_total
         FROM treinos
         WHERE status = 'realizado'
+        AND usuario_id = %s
     """
 
-    cursor.execute(sql)
+    cursor.execute(sql, (usuario_id,))
     resumo = cursor.fetchone()
 
     cursor.close()
@@ -185,6 +210,10 @@ def buscar_resumo():
 
     return resumo
 
+
+# ============================================================
+# STATUS DO TREINO
+# ============================================================
 
 def atualizar_status_treino(id, status):
     conexao = conectar()
@@ -203,7 +232,33 @@ def atualizar_status_treino(id, status):
     conexao.close()
 
 
+def concluir_treino_por_id(id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    sql = """
+        UPDATE treinos
+        SET status = 'realizado'
+        WHERE id = %s
+    """
+
+    cursor.execute(sql, (id,))
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
+
+
+def marcar_treino_realizado(id):
+    concluir_treino_por_id(id)
+
+
+# ============================================================
+# MODELOS DE TREINO
+# ============================================================
+
 def cadastrar_treino_modelo(
+    usuario_id,
     titulo,
     estilo,
     tamanho_piscina,
@@ -228,9 +283,10 @@ def cadastrar_treino_modelo(
             duracao_minutos,
             pace,
             observacoes,
-            equipamentos
+            equipamentos,
+            usuario_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
     valores = (
@@ -242,7 +298,8 @@ def cadastrar_treino_modelo(
         duracao_minutos,
         pace,
         observacoes,
-        equipamentos
+        equipamentos,
+        usuario_id
     )
 
     cursor.execute(sql, valores)
@@ -252,16 +309,17 @@ def cadastrar_treino_modelo(
     conexao.close()
 
 
-def listar_treinos_modelo():
+def listar_treinos_modelo(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
     sql = """
-        SELECT * FROM treinos_modelo
-        ORDER BY criado_em DESC
+       SELECT * FROM treinos_modelo
+       WHERE usuario_id = %s
+       ORDER BY criado_em DESC
     """
 
-    cursor.execute(sql)
+    cursor.execute(sql, (usuario_id,))
     treinos_modelo = cursor.fetchall()
 
     cursor.close()
@@ -269,8 +327,7 @@ def listar_treinos_modelo():
 
     return treinos_modelo
 
-def buscar_treino_modelo_por_id(id):
-
+def buscar_treino_modelo_por_id(id, usuario_id):
     conexao = conectar()
     cursor = conexao.cursor(dictionary=True)
 
@@ -278,9 +335,10 @@ def buscar_treino_modelo_por_id(id):
         SELECT *
         FROM treinos_modelo
         WHERE id = %s
+        AND usuario_id = %s
     """
 
-    cursor.execute(sql, (id,))
+    cursor.execute(sql, (id, usuario_id))
     treino = cursor.fetchone()
 
     cursor.close()
@@ -288,8 +346,12 @@ def buscar_treino_modelo_por_id(id):
 
     return treino
 
-def mover_treino_programado(id, nova_data):
 
+# ============================================================
+# CALENDÁRIO / MOVER TREINO PROGRAMADO
+# ============================================================
+
+def mover_treino_programado(id, nova_data):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -305,51 +367,3 @@ def mover_treino_programado(id, nova_data):
 
     cursor.close()
     conexao.close()
-    
-    
-def concluir_treino(id):
-
-    conexao = conectar()
-    cursor = conexao.cursor()
-
-    sql = """
-        UPDATE treinos
-        SET status = 'realizado'
-        WHERE id = %s
-    """
-
-    cursor.execute(sql, (id,))
-    conexao.commit()
-
-    cursor.close()
-    conexao.close()
-  
-def concluir_treino_por_id(id):
-    conn = conectar()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        UPDATE treinos
-        SET status = 'concluido'
-        WHERE id = %s
-    """, (id,))
-
-    conn.commit()
-    cursor.close()
-    conn.close()    
-    
-def marcar_treino_realizado(id):
-    conexao = conectar()
-    cursor = conexao.cursor()
-
-    sql = """
-        UPDATE treinos
-        SET status = 'realizado'
-        WHERE id = %s
-    """
-
-    cursor.execute(sql, (id,))
-    conexao.commit()
-
-    cursor.close()
-    conexao.close()    
