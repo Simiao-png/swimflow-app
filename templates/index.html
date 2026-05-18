@@ -21,8 +21,6 @@
 
             <div class="flip-card">
 
-                <!-- FRENTE -->
-
                 <section class="cadastro-card front-card">
 
                     <div class="cadastro-topo">
@@ -136,8 +134,6 @@
                     </form>
 
                 </section>
-
-                <!-- VERSO -->
 
                 <section class="cadastro-card back-card">
 
@@ -312,7 +308,7 @@
 
                             {% for treino in treinos %}
 
-                            <tr class="linha-treino">
+                            <tr class="linha-treino {% if treino.status == 'programado' %}treino-programado{% endif %}">
 
                                 <td>{{ treino.data_treino }}</td>
 
@@ -334,11 +330,24 @@
 
                                     <div class="acoes-hover">
 
-                                        <a href="/treino/{{ treino.id }}" class="acao-btn">
+                                        <form
+                                            action="/treino/{{ treino.id }}/realizar"
+                                            method="POST"
+                                        >
+                                            <button
+                                                type="submit"
+                                                class="acao-btn concluir"
+                                                title="Marcar como realizado"
+                                            >
+                                                <i class="fa-solid fa-check"></i>
+                                            </button>
+                                        </form>
+
+                                        <a href="/treino/{{ treino.id }}" class="acao-btn" title="Ver detalhes">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
 
-                                        <a href="/treino/{{ treino.id }}/editar" class="acao-btn">
+                                        <a href="/treino/{{ treino.id }}/editar" class="acao-btn" title="Editar treino">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
 
@@ -347,7 +356,7 @@
                                             method="POST"
                                             onsubmit="return confirm('Tem certeza?');"
                                         >
-                                            <button type="submit" class="acao-btn excluir">
+                                            <button type="submit" class="acao-btn excluir" title="Excluir treino">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </form>

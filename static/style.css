@@ -2204,3 +2204,69 @@ CORREÇÃO FINAL MOBILE - DETALHE DO TREINO
 
     transform: translateY(-2px);
 }
+
+/* ========================================
+   STATUS DO TREINO
+======================================== */
+
+.treino-programado{
+    background: rgba(255, 193, 7, 0.14);
+}
+
+.treino-programado:hover{
+    background: rgba(255, 193, 7, 0.22);
+}
+
+/* ========================================
+   BOTÕES DE AÇÃO
+======================================== */
+
+.acoes-hover{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.acoes-hover form{
+    margin: 0;
+}
+
+.acao-btn{
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #243552;
+
+    color: #cbd5e1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.acao-btn:hover{
+    transform: translateY(-2px);
+
+    background: #31476d;
+
+    color: white;
+}
+
+.acao-btn.concluir:hover{
+    background: #15803d;
+
+    color: white;
+}
+
+.acao-btn.excluir:hover{
+    background: #b91c1c;
+
+    color: white;
+}

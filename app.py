@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+
 from modelos.treinos import (
     cadastrar_treino,
     listar_treinos,
@@ -10,11 +11,13 @@ from modelos.treinos import (
     listar_treinos_modelo,
     buscar_treino_modelo_por_id,
     mover_treino_programado,
-    concluir_treino
+    concluir_treino_por_id,
+    marcar_treino_realizado
 )
 
 import calendar
 from datetime import date, datetime
+
 
 app = Flask(__name__)
 
@@ -36,9 +39,7 @@ def calcular_pace(duracao_minutos, distancia_metros):
 def home():
 
     treinos = listar_treinos()
-
     treinos_modelo = listar_treinos_modelo()
-
     resumo = buscar_resumo()
 
     return render_template(
@@ -90,7 +91,6 @@ def calendario():
     nome_mes = nomes_meses[mes]
 
     treinos = listar_treinos()
-
     treinos_por_dia = {}
 
     for treino in treinos:
@@ -245,6 +245,7 @@ def agendar_treino():
 
     return redirect('/calendario')
 
+
 @app.route('/mover-treino', methods=['POST'])
 def mover_treino():
 
@@ -254,6 +255,14 @@ def mover_treino():
     mover_treino_programado(treino_id, nova_data)
 
     return redirect('/calendario')
+
+
+@app.route('/concluir-treino/<int:id>', methods=['POST'])
+def concluir_treino(id):
+
+    concluir_treino_por_id(id)
+
+    return redirect('/')
 
 
 @app.route('/treino/<int:id>/editar')
@@ -313,6 +322,12 @@ def excluir_treino(id):
     excluir_treino_por_id(id)
 
     return redirect('/')
+
+@app.route('/treino/<int:id>/realizar', methods=['POST'])
+def realizar_treino(id):
+    marcar_treino_realizado(id)
+    return redirect('/')
+
 
 
 if __name__ == '__main__':

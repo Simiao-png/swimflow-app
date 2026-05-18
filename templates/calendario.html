@@ -219,9 +219,8 @@
 
             </div>
 
-            {% if treino.status == "programado" %}
-
-            <form action="/concluir-treino/{{ treino.id }}" method="POST">
+           
+            <form id="formConcluirTreino" method="POST" style="display: none;">
 
             <button type="submit" class="btn-concluir">
                 ✅ Concluir treino
@@ -229,8 +228,7 @@
 
             </form>
 
-            {% endif %}
-
+          
             <div class="observacoes-modal">
 
             <strong>📝 Observações</strong>
@@ -265,8 +263,17 @@
                 document.getElementById("modalObs").innerText = botao.dataset.observacoes || "Sem observações";
 
                 modal.style.display = "flex";
+                
+                const formConcluir = document.getElementById("formConcluirTreino");
 
-            });
+                if(botao.dataset.status === "programado"){
+                formConcluir.style.display = "block";
+                formConcluir.action = `/concluir-treino/${botao.dataset.id}`;
+                } else {
+                formConcluir.style.display = "none";
+                }
+
+                });
 
         });
 

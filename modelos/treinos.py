@@ -306,23 +306,6 @@ def mover_treino_programado(id, nova_data):
     cursor.close()
     conexao.close()
     
-def concluir_treino(id):
-
-    conexao = conectar()
-    cursor = conexao.cursor()
-
-    sql = """
-        UPDATE treinos
-        SET status = 'realizado'
-        WHERE id = %s
-    """
-
-    cursor.execute(sql, (id,))
-
-    conexao.commit()
-
-    cursor.close()
-    conexao.close()
     
 def concluir_treino(id):
 
@@ -340,3 +323,33 @@ def concluir_treino(id):
 
     cursor.close()
     conexao.close()
+  
+def concluir_treino_por_id(id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE treinos
+        SET status = 'concluido'
+        WHERE id = %s
+    """, (id,))
+
+    conn.commit()
+    cursor.close()
+    conn.close()    
+    
+def marcar_treino_realizado(id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    sql = """
+        UPDATE treinos
+        SET status = 'realizado'
+        WHERE id = %s
+    """
+
+    cursor.execute(sql, (id,))
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()    
