@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from functools import wraps
 import calendar
 from datetime import date, datetime
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email
 
 from modelos.treinos import (
@@ -76,7 +76,8 @@ def home():
         "index.html",
         treinos=treinos,
         treinos_modelo=treinos_modelo,
-        resumo=resumo
+        resumo=resumo,
+        usuario_nome=session.get("usuario_nome")
     )
 
 
@@ -390,7 +391,9 @@ def tela_cadastro_usuario():
 def cadastrar_usuario_app():
     nome = request.form["nome"]
     email = request.form["email"]
-    senha = request.form["senha"]
+    senha = generate_password_hash(
+    request.form["senha"]
+)
 
     usuario_existente = buscar_usuario_por_email(email)
 
@@ -406,19 +409,44 @@ def cadastrar_usuario_app():
 def tela_login():
     return render_template("login.html")
 
+@app.route("/recuperar-senha")
+def recuperar_senha():
+
+    return render_template("recuperar_senha.html")
 
 @app.route("/logar", methods=["POST"])
 def logar():
+
     email = request.form["email"]
     senha = request.form["senha"]
 
     usuario = buscar_usuario_por_email(email)
 
-    if usuario is None:
-        return "Usuário não encontrado"
+    if not usuario:
+        return render_template(
+            "login.html",
+            erro="Usuário ou senha incorretos"
+        )
 
-    if usuario["senha"] != senha:
-        return "Senha incorreta"
+    senha_salva = usuario["senha"]
+
+    senha_valida = False
+
+    if senha_salva.startswith("scrypt:"):
+
+        senha_valida = check_password_hash(
+            senha_salva,
+            senha
+        )
+
+    else:
+        senha_valida = senha_salva == senha
+
+    if not senha_valida:
+        return render_template(
+            "login.html",
+            erro="Usuário ou senha incorretos"
+        )
 
     session["usuario_id"] = usuario["id"]
     session["usuario_nome"] = usuario["nome"]

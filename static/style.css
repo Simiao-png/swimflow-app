@@ -2349,3 +2349,142 @@ LOGIN
 
     font-weight: bold;
 }
+
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+
+.pagina-auth {
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+.container {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+}
+
+.usuario-logado {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    transform: translateX(10px);
+
+    margin-bottom: -5px;
+
+    color: white;
+}
+
+.usuario-logado h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.usuario-logado a {
+    color: #00bfff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.usuario-logado a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .usuario-logado {
+        transform: translateX(0);
+        margin-bottom: 5px;
+    }
+
+    .usuario-logado h2 {
+        font-size: 15px;
+    }
+
+    .usuario-logado a {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+
+.mensagem-erro {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff6b6b;
+
+    border: 1px solid rgba(255, 77, 77, 0.35);
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.mensagem-erro {
+
+    background: rgba(255, 77, 77, 0.15);
+
+    border: 1px solid rgba(255, 77, 77, 0.4);
+
+    color: #ff6b6b;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+.auth-card button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #00bfff;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    margin-top: 10px;
+}
+
+.auth-card button:hover {
+
+    background: #0099cc;
+}

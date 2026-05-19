@@ -27,6 +27,11 @@
             <h1>🏊 SwimFlow</h1>
 
             <p>Faça login para acessar seus treinos</p>
+                {% if erro %}
+                <div class="mensagem-erro">
+                     {{ erro }}
+                </div>
+                {% endif %}
 
 
             <div class="form-group">
@@ -71,9 +76,17 @@
             >
 
                 Criar conta
-
+            
+            </a>
+            <a
+                href="/recuperar-senha"
+                class="link-auth"
+                >
+            
+                Esqueci minha senha
             </a>
 
+            
         </form>
 
     </div>

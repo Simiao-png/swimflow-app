@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recuperar senha</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body class="pagina-auth">
+
+    <div class="auth-container">
+
+        <form
+            action="/enviar-recuperacao"
+            method="POST"
+            class="auth-card"
+        >
+
+            <h1>🔐 Recuperar senha</h1>
+
+            <p>
+                Digite seu email para recuperar sua senha
+            </p>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
+
+            </div>
+
+           <button type="submit">
+
+                Enviar recuperação
+
+            </button>
+
+            <a
+                href="/login"
+                class="link-auth"
+            >
+                Voltar ao login
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
