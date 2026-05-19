@@ -8,6 +8,7 @@ import calendar
 from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email
+from database.connection import conectar
 
 from modelos.treinos import (
     cadastrar_treino,
@@ -415,11 +416,72 @@ def recuperar_senha():
     return render_template("recuperar_senha.html")
 
 @app.route("/alterar-senha")
-@login_obrigatorio
 def tela_alterar_senha():
 
     return render_template(
         "alterar_senha.html"
+    )
+
+@app.route("/enviar-recuperacao", methods=["POST"])
+def enviar_recuperacao():
+
+    email = request.form["email"]
+
+    usuario = buscar_usuario_por_email(email)
+
+    if not usuario:
+
+        return render_template(
+            "recuperar_senha.html",
+            erro="Email não encontrado"
+        )
+
+    return redirect(
+        url_for(
+            "tela_alterar_senha",
+            email=email
+        )
+    )
+
+
+@app.route("/salvar-nova-senha", methods=["POST"])
+def salvar_nova_senha():
+
+    email = request.form["email"]
+
+    nova_senha = request.form["nova_senha"]
+    confirmar_senha = request.form["confirmar_senha"]
+
+    if nova_senha != confirmar_senha:
+
+        return render_template(
+            "alterar_senha.html",
+            erro="As senhas não coincidem"
+        )
+
+    senha_hash = generate_password_hash(
+        nova_senha
+    )
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute(
+        """
+        UPDATE usuarios
+        SET senha = %s
+        WHERE email = %s
+        """,
+        (senha_hash, email)
+    )
+
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
+
+    return redirect(
+        url_for("tela_login")
     )
 
 @app.route("/logar", methods=["POST"])

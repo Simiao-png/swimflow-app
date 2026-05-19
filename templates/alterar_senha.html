@@ -11,7 +11,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Alterar senha</title>
+    <title>Recuperar senha</title>
 
     <link
         rel="stylesheet"
@@ -30,23 +30,17 @@
             class="auth-card"
         >
 
-            <h1>🔐 Alterar senha</h1>
+            <h1>🔐 Recuperar senha</h1>
 
             <p>
-                Digite sua senha atual e a nova senha
+                Crie sua nova senha
             </p>
 
-            <div class="form-group">
-
-                <label>Senha atual</label>
-
-                <input
-                    type="password"
-                    name="senha_atual"
-                    required
-                >
-
-            </div>
+            <input
+                type="hidden"
+                name="email"
+                value="{{ request.args.get('email') }}"
+            >
 
             <div class="form-group">
 
@@ -82,10 +76,10 @@
             </button>
 
             <a
-                href="/"
+                href="/login"
                 class="link-auth"
             >
-                Voltar
+                Voltar ao login
             </a>
 
         </form>
