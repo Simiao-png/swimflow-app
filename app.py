@@ -414,6 +414,14 @@ def recuperar_senha():
 
     return render_template("recuperar_senha.html")
 
+@app.route("/alterar-senha")
+@login_obrigatorio
+def tela_alterar_senha():
+
+    return render_template(
+        "alterar_senha.html"
+    )
+
 @app.route("/logar", methods=["POST"])
 def logar():
 
