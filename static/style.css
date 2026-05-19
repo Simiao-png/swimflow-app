@@ -2488,3 +2488,103 @@ body {
 
     background: #0099cc;
 }
+
+@media(max-width: 768px){
+
+    .container{
+        padding: 14px;
+        gap: 18px;
+    }
+
+    .usuario-logado{
+        margin-top: 10px;
+        margin-bottom: 8px;
+        transform: none;
+    }
+
+    .cadastro-card{
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .cadastro-topo h1{
+        font-size: 26px;
+    }
+
+    .cadastro-topo p{
+        font-size: 13px;
+    }
+
+    .dashboard-cards{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dashboard-card{
+        min-height: 90px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .dashboard-card h3{
+        font-size: 32px;
+    }
+
+    .historico-topo{
+        gap: 10px;
+    }
+
+    .historico-topo h2{
+        font-size: 24px;
+    }
+
+    .historico-topo p{
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 768px){
+
+    .auth-container{
+        padding: 16px;
+    }
+
+    .auth-card{
+        width: 100%;
+        max-width: 100%;
+
+        padding: 32px 24px;
+
+        border-radius: 22px;
+
+        gap: 16px;
+
+        box-sizing: border-box;
+    }
+
+    .auth-card h1{
+        font-size: 38px;
+        line-height: 1.1;
+    }
+
+    .auth-card p{
+        font-size: 15px;
+    }
+
+    .auth-card input{
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    .auth-card button,
+    .btn-auth{
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .link-auth{
+        font-size: 15px;
+    }
+
+}
