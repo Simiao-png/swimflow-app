@@ -2588,3 +2588,34 @@ body {
     }
 
 }
+
+.perfil-topo{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+.perfil-topo{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 12px;
+}
+
+.foto-perfil{
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 3px solid #00bfff;
+
+    box-shadow: 0 0 12px rgba(0,191,255,0.4);
+
+    display: block;
+}

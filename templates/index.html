@@ -24,8 +24,24 @@
 <main class="container">
        
         <div class="usuario-logado">
-            <h2>Olá, {{ usuario_nome }} 👋</h2>
-            <a href="{{ url_for('logout') }}">Sair</a>
+
+            <div class="perfil-topo">
+
+                <img
+                    src="{{ url_for('static', filename='img/avatar-padrao.jpg') }}"
+                    class="foto-perfil"
+                >
+
+                <h2>
+                    Olá, {{ usuario_nome }} 👋
+                </h2>
+
+            </div>
+
+            <a href="{{ url_for('logout') }}">
+                 Sair
+            </a>
+
         </div>
 
 

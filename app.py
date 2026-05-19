@@ -9,6 +9,15 @@ from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email
 from database.connection import conectar
+from werkzeug.utils import secure_filename
+import os
+
+app = Flask(__name__)
+app.secret_key = "natacao_app_secret"
+
+UPLOAD_FOLDER = "static/img/usuarios"
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 from modelos.treinos import (
     cadastrar_treino,
