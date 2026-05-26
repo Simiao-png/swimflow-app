@@ -1,234 +1,226 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Treino</title>
+{% block title %}Editar Treino{% endblock %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% block content %}
 
-<body class="editar-body">
+<main class="editar-page">
 
-    <main class="editar-page">
+    <div class="editar-container">
 
-        <div class="editar-container">
+        <h1>Editar Treino</h1>
 
-            <h1>Editar Treino</h1>
+        <form
+            action="{{ url_for('atualizar', id=treino.id) }}"
+            method="POST"
+            class="editar-form"
+        >
 
-            <form
-                action="{{ url_for('atualizar', id=treino.id) }}"
-                method="POST"
-                class="editar-form"
-            >
+            <div class="form-grid">
 
-                <div class="form-grid">
+                <div class="form-group">
+                    <label>Data do treino</label>
 
-                    <div class="form-group">
-                        <label>Data do treino</label>
-
-                        <input
-                            type="date"
-                            name="data_treino"
-                            value="{{ treino.data_treino.strftime('%Y-%m-%d') }}"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Título do treino</label>
-
-                        <input
-                            type="text"
-                            name="titulo"
-                            value="{{ treino.titulo }}"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tipo de treino</label>
-
-                        <select name="estilo">
-
-                            <option value="Crawl"
-                                {% if treino.estilo == 'Crawl' %}selected{% endif %}>
-                                Crawl
-                            </option>
-
-                            <option value="Costas"
-                                {% if treino.estilo == 'Costas' %}selected{% endif %}>
-                                Costas
-                            </option>
-
-                            <option value="Peito"
-                                {% if treino.estilo == 'Peito' %}selected{% endif %}>
-                                Peito
-                            </option>
-
-                            <option value="Borboleta"
-                                {% if treino.estilo == 'Borboleta' %}selected{% endif %}>
-                                Borboleta
-                            </option>
-
-                            <option value="Medley"
-                                {% if treino.estilo == 'Medley' %}selected{% endif %}>
-                                Medley
-                            </option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tamanho da piscina</label>
-
-                        <select name="tamanho_piscina">
-
-                            <option value="12.5"
-                                {% if treino.tamanho_piscina == 12.5 %}selected{% endif %}>
-                                12.5m
-                            </option>
-
-                            <option value="25"
-                                {% if treino.tamanho_piscina == 25 %}selected{% endif %}>
-                                25m
-                            </option>
-
-                            <option value="50"
-                                {% if treino.tamanho_piscina == 50 %}selected{% endif %}>
-                                50m
-                            </option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Número de voltas</label>
-
-                        <input
-                            type="number"
-                            name="voltas"
-                            value="{{ treino.voltas }}"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Duração em minutos</label>
-
-                        <input
-                            type="number"
-                            name="duracao_minutos"
-                            value="{{ treino.duracao_minutos }}"
-                            required
-                        >
-                    </div>
-
+                    <input
+                        type="date"
+                        name="data_treino"
+                        value="{{ treino.data_treino.strftime('%Y-%m-%d') }}"
+                        required
+                    >
                 </div>
 
                 <div class="form-group">
+                    <label>Título do treino</label>
 
-                    <label>Equipamentos</label>
-
-                    <div class="equipamentos-grid">
-
-                        <label class="equipamento-item">
-
-                            <span>Palmar</span>
-
-                            <input
-                                type="checkbox"
-                                name="equipamentos"
-                                value="Palmar"
-
-                                {% if treino.equipamentos and 'Palmar' in treino.equipamentos %}
-                                    checked
-                                {% endif %}
-                            >
-
-                        </label>
-
-                        <label class="equipamento-item">
-
-                            <span>Pullbuoy</span>
-
-                            <input
-                                type="checkbox"
-                                name="equipamentos"
-                                value="Pullbuoy"
-
-                                {% if treino.equipamentos and 'Pullbuoy' in treino.equipamentos %}
-                                    checked
-                                {% endif %}
-                            >
-
-                        </label>
-
-                        <label class="equipamento-item">
-
-                            <span>Prancha</span>
-
-                            <input
-                                type="checkbox"
-                                name="equipamentos"
-                                value="Prancha"
-
-                                {% if treino.equipamentos and 'Prancha' in treino.equipamentos %}
-                                    checked
-                                {% endif %}
-                            >
-
-                        </label>
-
-                        <label class="equipamento-item">
-
-                            <span>Pé de pato</span>
-
-                            <input
-                                type="checkbox"
-                                name="equipamentos"
-                                value="Pé de pato"
-
-                                {% if treino.equipamentos and 'Pé de pato' in treino.equipamentos %}
-                                    checked
-                                {% endif %}
-                            >
-
-                        </label>
-
-                    </div>
-
+                    <input
+                        type="text"
+                        name="titulo"
+                        value="{{ treino.titulo }}"
+                        required
+                    >
                 </div>
 
                 <div class="form-group">
+                    <label>Tipo de treino</label>
 
-                    <label>Observações</label>
+                    <select name="estilo">
 
-                    <textarea
-                        name="observacoes"
-                        rows="5"
-                    >{{ treino.observacoes }}</textarea>
+                        <option value="Crawl"
+                            {% if treino.estilo == 'Crawl' %}selected{% endif %}>
+                            Crawl
+                        </option>
+
+                        <option value="Costas"
+                            {% if treino.estilo == 'Costas' %}selected{% endif %}>
+                            Costas
+                        </option>
+
+                        <option value="Peito"
+                            {% if treino.estilo == 'Peito' %}selected{% endif %}>
+                            Peito
+                        </option>
+
+                        <option value="Borboleta"
+                            {% if treino.estilo == 'Borboleta' %}selected{% endif %}>
+                            Borboleta
+                        </option>
+
+                        <option value="Medley"
+                            {% if treino.estilo == 'Medley' %}selected{% endif %}>
+                            Medley
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tamanho da piscina</label>
+
+                    <select name="tamanho_piscina">
+
+                        <option value="12.5"
+                            {% if treino.tamanho_piscina == 12.5 %}selected{% endif %}>
+                            12.5m
+                        </option>
+
+                        <option value="25"
+                            {% if treino.tamanho_piscina == 25 %}selected{% endif %}>
+                            25m
+                        </option>
+
+                        <option value="50"
+                            {% if treino.tamanho_piscina == 50 %}selected{% endif %}>
+                            50m
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Número de voltas</label>
+
+                    <input
+                        type="number"
+                        name="voltas"
+                        value="{{ treino.voltas }}"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Duração em minutos</label>
+
+                    <input
+                        type="number"
+                        name="duracao_minutos"
+                        value="{{ treino.duracao_minutos }}"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Equipamentos</label>
+
+                <div class="equipamentos-grid">
+
+                    <label class="equipamento-item">
+
+                        <span>Palmar</span>
+
+                        <input
+                            type="checkbox"
+                            name="equipamentos"
+                            value="Palmar"
+
+                            {% if treino.equipamentos and 'Palmar' in treino.equipamentos %}
+                                checked
+                            {% endif %}
+                        >
+
+                    </label>
+
+                    <label class="equipamento-item">
+
+                        <span>Pullbuoy</span>
+
+                        <input
+                            type="checkbox"
+                            name="equipamentos"
+                            value="Pullbuoy"
+
+                            {% if treino.equipamentos and 'Pullbuoy' in treino.equipamentos %}
+                                checked
+                            {% endif %}
+                        >
+
+                    </label>
+
+                    <label class="equipamento-item">
+
+                        <span>Prancha</span>
+
+                        <input
+                            type="checkbox"
+                            name="equipamentos"
+                            value="Prancha"
+
+                            {% if treino.equipamentos and 'Prancha' in treino.equipamentos %}
+                                checked
+                            {% endif %}
+                        >
+
+                    </label>
+
+                    <label class="equipamento-item">
+
+                        <span>Pé de pato</span>
+
+                        <input
+                            type="checkbox"
+                            name="equipamentos"
+                            value="Pé de pato"
+
+                            {% if treino.equipamentos and 'Pé de pato' in treino.equipamentos %}
+                                checked
+                            {% endif %}
+                        >
+
+                    </label>
 
                 </div>
 
-                <div class="editar-acoes">
+            </div>
 
-                    <button type="submit" class="btn-salvar">
-                        💾 Salvar Alterações
-                    </button>
+            <div class="form-group">
 
-                    <a href="/" class="btn-voltar">
-                        ← Voltar
-                    </a>
+                <label>Observações</label>
 
-                </div>
+                <textarea
+                    name="observacoes"
+                    rows="5"
+                >{{ treino.observacoes }}</textarea>
 
-            </form>
+            </div>
 
-        </div>
+            <div class="editar-acoes">
 
-    </main>
+                <button type="submit" class="btn-salvar">
+                    💾 Salvar Alterações
+                </button>
 
-</body>
+                <a href="/" class="btn-voltar">
+                    ← Voltar
+                </a>
 
-</html>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+{% endblock %}

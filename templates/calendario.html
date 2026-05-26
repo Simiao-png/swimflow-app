@@ -1,618 +1,426 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
+{% block title %}SwimFlow | Calendário{% endblock %}
 
-    <meta charset="UTF-8">
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+>
+{% endblock %}
 
-    <title>Calendário de Treinos</title>
+{% block content %}
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+<main class="container-calendario">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    >
+    <div class="calendario-layout">
 
-</head>
+        <section class="calendario-area">
 
-<body>
+            <a href="/" class="btn-voltar-home">
+                ← Voltar
+            </a>
 
-    <main class="container-calendario">
+            <div class="topo-calendario">
 
-
-        <!-- ===================================================== -->
-        <!-- LAYOUT -->
-        <!-- ===================================================== -->
-
-        <div class="calendario-layout">
-
-
-            <!-- ===================================================== -->
-            <!-- ÁREA DO CALENDÁRIO -->
-            <!-- ===================================================== -->
-
-            <section class="calendario-area">
-
-
-                <a href="/" class="btn-voltar-home">
-
-                    ← Voltar
-
+                <a
+                    class="btn-mes"
+                    href="{{ url_for('calendario_view', ano=ano_anterior, mes=mes_anterior) }}"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
                 </a>
 
+                <h1>{{ nome_mes }} {{ ano }}</h1>
 
-                <!-- ===================================================== -->
-                <!-- TOPO -->
-                <!-- ===================================================== -->
+                <a
+                    class="btn-mes"
+                    href="{{ url_for('calendario_view', ano=proximo_ano, mes=proximo_mes) }}"
+                >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
 
-                <div class="topo-calendario">
+            </div>
 
+            <table class="calendario">
 
-                    <a
-                        class="btn-mes"
-                        href="{{ url_for('calendario_view', ano=ano_anterior, mes=mes_anterior) }}"
-                    >
+                <thead>
+                    <tr>
+                        <th>Dom</th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                    </tr>
+                </thead>
 
-                        <i class="fa-solid fa-chevron-left"></i>
+                <tbody>
 
-                    </a>
+                    {% for semana in calendario_mes %}
 
+                    <tr>
 
-                    <h1>
+                        {% for dia in semana %}
 
-                        {{ nome_mes }} {{ ano }}
+                        <td
+                            class="dia-calendario"
+                            data-dia="{{ dia }}"
+                        >
 
-                    </h1>
+                            {% if dia != 0 %}
 
+                            <strong>{{ dia }}</strong>
 
-                    <a
-                        class="btn-mes"
-                        href="{{ url_for('calendario_view', ano=proximo_ano, mes=proximo_mes) }}"
-                    >
+                            {% if dia in treinos_por_dia %}
 
-                        <i class="fa-solid fa-chevron-right"></i>
+                            {% for treino in treinos_por_dia[dia] %}
 
-                    </a>
+                            <button
+                                type="button"
 
-                </div>
-
-
-                <!-- ===================================================== -->
-                <!-- TABELA CALENDÁRIO -->
-                <!-- ===================================================== -->
-
-                <table class="calendario">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Dom</th>
-                            <th>Seg</th>
-                            <th>Ter</th>
-                            <th>Qua</th>
-                            <th>Qui</th>
-                            <th>Sex</th>
-                            <th>Sáb</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        {% for semana in calendario_mes %}
-
-                        <tr>
-
-                            {% for dia in semana %}
-
-                            <td
-                                class="dia-calendario"
-                                data-dia="{{ dia }}"
-                            >
-
-                                {% if dia != 0 %}
-
-                                <strong>{{ dia }}</strong>
-
-
-                                <!-- ===================================================== -->
-                                <!-- TREINOS DO DIA -->
-                                <!-- ===================================================== -->
-
-                                {% if dia in treinos_por_dia %}
-
-                                {% for treino in treinos_por_dia[dia] %}
-
-                                <button
-                                    type="button"
-
-                                    class="
-                                        treino-link
-
-                                        {% if treino.status == 'programado' %}
-                                            programado
-                                            treino-programado-arrastavel
-                                        {% endif %}
-
-                                        {% if treino.status == 'realizado' %}
-                                            treino-realizado
-                                        {% endif %}
-                                    "
+                                class="
+                                    treino-link
 
                                     {% if treino.status == 'programado' %}
-                                        draggable="true"
+                                        programado
+                                        treino-programado-arrastavel
                                     {% endif %}
 
-                                    data-id="{{ treino.id }}"
-                                    data-status="{{ treino.status }}"
-                                    data-titulo="{{ treino.titulo }}"
-                                    data-data="{{ treino.data_treino }}"
-                                    data-estilo="{{ treino.estilo }}"
-                                    data-distancia="{{ treino.distancia_metros }}m"
-                                    data-duracao="{{ treino.duracao_minutos }} min"
-                                    data-pace="{{ treino.pace }}"
-                                    data-piscina="{{ treino.tamanho_piscina }}m"
-                                    data-voltas="{{ treino.voltas }}"
-                                    data-equipamentos="{{ treino.equipamentos }}"
-                                    data-observacoes="{{ treino.observacoes }}"
-                                >
+                                    {% if treino.status == 'realizado' %}
+                                        treino-realizado
+                                    {% endif %}
+                                "
 
-                                    🏊 {{ treino.titulo }}
-
-                                </button>
-
-                                {% endfor %}
-
+                                {% if treino.status == 'programado' %}
+                                    draggable="true"
                                 {% endif %}
 
-                                {% endif %}
-
-                            </td>
+                                data-id="{{ treino.id }}"
+                                data-status="{{ treino.status }}"
+                                data-titulo="{{ treino.titulo }}"
+                                data-data="{{ treino.data_treino }}"
+                                data-estilo="{{ treino.estilo }}"
+                                data-distancia="{{ treino.distancia_metros }}m"
+                                data-duracao="{{ treino.duracao_minutos }} min"
+                                data-pace="{{ treino.pace }}"
+                                data-piscina="{{ treino.tamanho_piscina }}m"
+                                data-voltas="{{ treino.voltas }}"
+                                data-equipamentos="{{ treino.equipamentos }}"
+                                data-observacoes="{{ treino.observacoes }}"
+                            >
+                                🏊 {{ treino.titulo }}
+                            </button>
 
                             {% endfor %}
 
-                        </tr>
+                            {% endif %}
+
+                            {% endif %}
+
+                        </td>
 
                         {% endfor %}
 
-                    </tbody>
-
-                </table>
-
-            </section>
-
-
-            <!-- ===================================================== -->
-            <!-- SIDEBAR -->
-            <!-- ===================================================== -->
-
-            <aside class="sidebar-modelos">
-
-                <h2>Treinos Programados</h2>
-
-
-                <div class="lista-modelos">
-
-                    {% for modelo in treinos_modelo %}
-
-                    <div
-                        class="modelo-card modelo-arrastavel"
-
-                        draggable="true"
-
-                        data-id="{{ modelo.id }}"
-                        data-titulo="{{ modelo.titulo }}"
-                    >
-
-                        <h3>{{ modelo.titulo }}</h3>
-
-                        <p>🏊 {{ modelo.estilo }}</p>
-
-                        <p>📏 {{ modelo.distancia_metros }}m</p>
-
-                        <p>⏱ {{ modelo.duracao_minutos }} min</p>
-
-                    </div>
+                    </tr>
 
                     {% endfor %}
 
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <aside class="sidebar-modelos">
+
+            <h2>Treinos Programados</h2>
+
+            <div class="lista-modelos">
+
+                {% for modelo in treinos_modelo %}
+
+                <div
+                    class="modelo-card modelo-arrastavel"
+                    draggable="true"
+                    data-id="{{ modelo.id }}"
+                    data-titulo="{{ modelo.titulo }}"
+                >
+                    <h3>{{ modelo.titulo }}</h3>
+
+                    <p>🏊 {{ modelo.estilo }}</p>
+
+                    <p>📏 {{ modelo.distancia_metros }}m</p>
+
+                    <p>⏱ {{ modelo.duracao_minutos }} min</p>
                 </div>
 
-            </aside>
+                {% endfor %}
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<div id="modalTreino" class="modal">
+
+    <div class="modal-content treino-modal">
+
+        <span class="close-modal">
+            &times;
+        </span>
+
+        <h2 id="modalTitulo"></h2>
+
+        <div class="metricas-modal">
+
+            <div class="metrica-modal">
+                <h3 id="modalDistancia"></h3>
+                <span>Distância</span>
+            </div>
+
+            <div class="metrica-modal">
+                <h3 id="modalDuracao"></h3>
+                <span>Duração</span>
+            </div>
+
+            <div class="metrica-modal">
+                <h3 id="modalPace"></h3>
+                <span>Ritmo</span>
+            </div>
 
         </div>
 
-    </main>
+        <div class="info-grid-modal">
 
-
-    <!-- ===================================================== -->
-    <!-- MODAL -->
-    <!-- ===================================================== -->
-
-    <div id="modalTreino" class="modal">
-
-
-        <div class="modal-content treino-modal">
-
-
-            <span class="close-modal">
-
-                &times;
-
-            </span>
-
-
-            <h2 id="modalTitulo"></h2>
-
-
-            <!-- ===================================================== -->
-            <!-- MÉTRICAS -->
-            <!-- ===================================================== -->
-
-            <div class="metricas-modal">
-
-
-                <div class="metrica-modal">
-
-                    <h3 id="modalDistancia"></h3>
-
-                    <span>Distância</span>
-
-                </div>
-
-
-                <div class="metrica-modal">
-
-                    <h3 id="modalDuracao"></h3>
-
-                    <span>Duração</span>
-
-                </div>
-
-
-                <div class="metrica-modal">
-
-                    <h3 id="modalPace"></h3>
-
-                    <span>Ritmo</span>
-
-                </div>
-
+            <div class="info-box-modal">
+                <strong>📅 Data</strong>
+                <p id="modalData"></p>
             </div>
 
-
-            <!-- ===================================================== -->
-            <!-- INFO GRID -->
-            <!-- ===================================================== -->
-
-            <div class="info-grid-modal">
-
-
-                <div class="info-box-modal">
-
-                    <strong>📅 Data</strong>
-
-                    <p id="modalData"></p>
-
-                </div>
-
-
-                <div class="info-box-modal">
-
-                    <strong>🏊 Estilo</strong>
-
-                    <p id="modalEstilo"></p>
-
-                </div>
-
-
-                <div class="info-box-modal">
-
-                    <strong>🏟️ Piscina</strong>
-
-                    <p id="modalPiscina"></p>
-
-                </div>
-
-
-                <div class="info-box-modal">
-
-                    <strong>🔄 Voltas</strong>
-
-                    <p id="modalVoltas"></p>
-
-                </div>
-
-
-                <div class="info-box-modal">
-
-                    <strong>🎒 Equipamentos</strong>
-
-                    <p id="modalEquipamentos"></p>
-
-                </div>
-
+            <div class="info-box-modal">
+                <strong>🏊 Estilo</strong>
+                <p id="modalEstilo"></p>
             </div>
 
+            <div class="info-box-modal">
+                <strong>🏟️ Piscina</strong>
+                <p id="modalPiscina"></p>
+            </div>
 
-            <!-- ===================================================== -->
-            <!-- BOTÃO CONCLUIR -->
-            <!-- ===================================================== -->
+            <div class="info-box-modal">
+                <strong>🔄 Voltas</strong>
+                <p id="modalVoltas"></p>
+            </div>
 
-            <form
-                id="formConcluirTreino"
-                method="POST"
-                style="display: none;"
+            <div class="info-box-modal">
+                <strong>🎒 Equipamentos</strong>
+                <p id="modalEquipamentos"></p>
+            </div>
+
+        </div>
+
+        <form
+            id="formConcluirTreino"
+            method="POST"
+            style="display: none;"
+        >
+            <button
+                type="submit"
+                class="btn-concluir"
             >
+                ✅ Concluir treino
+            </button>
+        </form>
 
-                <button
-                    type="submit"
-                    class="btn-concluir"
-                >
-
-                    ✅ Concluir treino
-
-                </button>
-
-            </form>
-
-
-            <!-- ===================================================== -->
-            <!-- OBSERVAÇÕES -->
-            <!-- ===================================================== -->
-
-            <div class="observacoes-modal">
-
-                <strong>📝 Observações</strong>
-
-                <p id="modalObs"></p>
-
-            </div>
-
+        <div class="observacoes-modal">
+            <strong>📝 Observações</strong>
+            <p id="modalObs"></p>
         </div>
 
     </div>
 
+</div>
 
-    <!-- ===================================================== -->
-    <!-- SCRIPT -->
-    <!-- ===================================================== -->
+{% endblock %}
 
-    <script>
+{% block scripts %}
 
-        const modal = document.getElementById("modalTreino");
+<script>
 
-        const botoesTreino = document.querySelectorAll(".treino-link");
+    const modal = document.getElementById("modalTreino");
 
-        const fecharModal = document.querySelector(".close-modal");
+    const botoesTreino = document.querySelectorAll(".treino-link");
 
+    const fecharModal = document.querySelector(".close-modal");
 
-        // =====================================================
-        // MODAL
-        // =====================================================
+    botoesTreino.forEach(botao => {
 
-        botoesTreino.forEach(botao => {
+        botao.addEventListener("click", () => {
 
-            botao.addEventListener("click", () => {
+            document.getElementById("modalTitulo").innerText = botao.dataset.titulo;
 
-                document.getElementById("modalTitulo").innerText = botao.dataset.titulo;
+            document.getElementById("modalData").innerText = botao.dataset.data;
 
-                document.getElementById("modalData").innerText = botao.dataset.data;
+            document.getElementById("modalEstilo").innerText = botao.dataset.estilo;
 
-                document.getElementById("modalEstilo").innerText = botao.dataset.estilo;
+            document.getElementById("modalDistancia").innerText = botao.dataset.distancia;
 
-                document.getElementById("modalDistancia").innerText = botao.dataset.distancia;
+            document.getElementById("modalDuracao").innerText = botao.dataset.duracao;
 
-                document.getElementById("modalDuracao").innerText = botao.dataset.duracao;
+            document.getElementById("modalPace").innerText = botao.dataset.pace;
 
-                document.getElementById("modalPace").innerText = botao.dataset.pace;
+            document.getElementById("modalPiscina").innerText = botao.dataset.piscina;
 
-                document.getElementById("modalPiscina").innerText = botao.dataset.piscina;
+            document.getElementById("modalVoltas").innerText =
+                botao.dataset.voltas || "Não informado";
 
-                document.getElementById("modalVoltas").innerText =
-                    botao.dataset.voltas || "Não informado";
+            document.getElementById("modalEquipamentos").innerText =
+                botao.dataset.equipamentos || "Nenhum";
 
-                document.getElementById("modalEquipamentos").innerText =
-                    botao.dataset.equipamentos || "Nenhum";
+            document.getElementById("modalObs").innerText =
+                botao.dataset.observacoes || "Sem observações";
 
-                document.getElementById("modalObs").innerText =
-                    botao.dataset.observacoes || "Sem observações";
+            modal.style.display = "flex";
 
+            const formConcluir =
+                document.getElementById("formConcluirTreino");
 
-                modal.style.display = "flex";
+            if (botao.dataset.status === "programado") {
 
+                formConcluir.style.display = "block";
 
-                // =====================================================
-                // BOTÃO CONCLUIR
-                // =====================================================
+                formConcluir.action =
+                    `/concluir-treino/${botao.dataset.id}`;
 
-                const formConcluir =
-                    document.getElementById("formConcluirTreino");
+            } else {
 
-
-                if (botao.dataset.status === "programado") {
-
-                    formConcluir.style.display = "block";
-
-                    formConcluir.action =
-                        `/concluir-treino/${botao.dataset.id}`;
-
-                } else {
-
-                    formConcluir.style.display = "none";
-
-                }
-
-            });
-
-        });
-
-
-        fecharModal.addEventListener("click", () => {
-
-            modal.style.display = "none";
-
-        });
-
-
-        window.addEventListener("click", (event) => {
-
-            if(event.target === modal){
-
-                modal.style.display = "none";
+                formConcluir.style.display = "none";
 
             }
 
         });
 
+    });
 
-        // =====================================================
-        // DRAG AND DROP
-        // =====================================================
+    fecharModal.addEventListener("click", () => {
 
-        const modelosArrastaveis =
-            document.querySelectorAll(".modelo-arrastavel");
+        modal.style.display = "none";
 
-        const treinosProgramados =
-            document.querySelectorAll(".treino-programado-arrastavel");
+    });
 
-        const diasCalendario =
-            document.querySelectorAll(".dia-calendario");
+    window.addEventListener("click", (event) => {
 
+        if(event.target === modal){
 
-        let treinoSelecionado = null;
+            modal.style.display = "none";
 
+        }
 
-        // =====================================================
-        // MODELOS
-        // =====================================================
+    });
 
-        modelosArrastaveis.forEach(modelo => {
+    const modelosArrastaveis =
+        document.querySelectorAll(".modelo-arrastavel");
 
-            modelo.addEventListener("dragstart", () => {
+    const treinosProgramados =
+        document.querySelectorAll(".treino-programado-arrastavel");
 
-                treinoSelecionado = {
+    const diasCalendario =
+        document.querySelectorAll(".dia-calendario");
 
-                    tipo: "modelo",
+    let treinoSelecionado = null;
 
-                    id: modelo.dataset.id
+    modelosArrastaveis.forEach(modelo => {
 
-                };
+        modelo.addEventListener("dragstart", () => {
 
-            });
+            treinoSelecionado = {
 
-        });
+                tipo: "modelo",
 
+                id: modelo.dataset.id
 
-        // =====================================================
-        // TREINOS PROGRAMADOS
-        // =====================================================
-
-        treinosProgramados.forEach(treino => {
-
-            treino.addEventListener("dragstart", () => {
-
-                treinoSelecionado = {
-
-                    tipo: "treino-programado",
-
-                    id: treino.dataset.id
-
-                };
-
-            });
+            };
 
         });
 
+    });
 
-        // =====================================================
-        // DIAS DO CALENDÁRIO
-        // =====================================================
+    treinosProgramados.forEach(treino => {
 
-        diasCalendario.forEach(dia => {
+        treino.addEventListener("dragstart", () => {
 
-            dia.addEventListener("dragover", (event) => {
+            treinoSelecionado = {
 
-                event.preventDefault();
+                tipo: "treino-programado",
 
-            });
+                id: treino.dataset.id
 
-
-            dia.addEventListener("drop", () => {
-
-                if(!treinoSelecionado) return;
-
-
-                const diaSelecionado = dia.dataset.dia;
-
-                const mesSelecionado = "{{ mes }}";
-
-                const anoSelecionado = "{{ ano }}";
-
-
-                if(diaSelecionado === "0") return;
-
-
-                const dataTreino =
-                    `${anoSelecionado}-${String(mesSelecionado).padStart(2, "0")}-${String(diaSelecionado).padStart(2, "0")}`;
-
-
-                const formulario =
-                    document.createElement("form");
-
-
-                formulario.method = "POST";
-
-
-                // =====================================================
-                // NOVO MODELO
-                // =====================================================
-
-                if(treinoSelecionado.tipo === "modelo"){
-
-                    formulario.action = "/agendar-treino";
-
-                    formulario.innerHTML = `
-                        <input type="hidden" name="modelo_id" value="${treinoSelecionado.id}">
-                        <input type="hidden" name="data_treino" value="${dataTreino}">
-                    `;
-
-                }
-
-
-                // =====================================================
-                // MOVER TREINO
-                // =====================================================
-
-                else {
-
-                    formulario.action = "/mover-treino";
-
-                    formulario.innerHTML = `
-                        <input type="hidden" name="treino_id" value="${treinoSelecionado.id}">
-                        <input type="hidden" name="nova_data" value="${dataTreino}">
-                    `;
-
-                }
-
-
-                document.body.appendChild(formulario);
-
-                formulario.submit();
-
-            });
+            };
 
         });
 
-    </script>
+    });
 
-</body>
+    diasCalendario.forEach(dia => {
 
-</html>
+        dia.addEventListener("dragover", (event) => {
+
+            event.preventDefault();
+
+        });
+
+        dia.addEventListener("drop", () => {
+
+            if(!treinoSelecionado) return;
+
+            const diaSelecionado = dia.dataset.dia;
+
+            const mesSelecionado = "{{ mes }}";
+
+            const anoSelecionado = "{{ ano }}";
+
+            if(diaSelecionado === "0") return;
+
+            const dataTreino =
+                `${anoSelecionado}-${String(mesSelecionado).padStart(2, "0")}-${String(diaSelecionado).padStart(2, "0")}`;
+
+            const formulario =
+                document.createElement("form");
+
+            formulario.method = "POST";
+
+            if(treinoSelecionado.tipo === "modelo"){
+
+                formulario.action = "/agendar-treino";
+
+                formulario.innerHTML = `
+                    <input type="hidden" name="modelo_id" value="${treinoSelecionado.id}">
+                    <input type="hidden" name="data_treino" value="${dataTreino}">
+                `;
+
+            } else {
+
+                formulario.action = "/mover-treino";
+
+                formulario.innerHTML = `
+                    <input type="hidden" name="treino_id" value="${treinoSelecionado.id}">
+                    <input type="hidden" name="nova_data" value="${dataTreino}">
+                `;
+
+            }
+
+            document.body.appendChild(formulario);
+
+            formulario.submit();
+
+        });
+
+    });
+
+</script>
+
+{% endblock %}
