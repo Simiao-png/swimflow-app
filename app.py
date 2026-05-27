@@ -2,22 +2,14 @@
 # IMPORTAÇÕES
 # ============================================================
 
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, Response
 from functools import wraps
 import calendar
 from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email
 from database.connection import conectar
-from werkzeug.utils import secure_filename
-import os
-
-app = Flask(__name__)
-app.secret_key = "natacao_app_secret"
-
-UPLOAD_FOLDER = "static/img/usuarios"
-
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+from xml.sax.saxutils import escape
 
 from modelos.treinos import (
     cadastrar_treino,
@@ -42,6 +34,9 @@ from modelos.treinos import (
 app = Flask(__name__)
 app.secret_key = "natacao_app_secret"
 
+UPLOAD_FOLDER = "static/img/usuarios"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 
 # ============================================================
 # FUNÇÕES AUXILIARES
@@ -63,6 +58,7 @@ def login_obrigatorio(funcao):
     def verificar_login(*args, **kwargs):
         if "usuario_id" not in session:
             return redirect(url_for("tela_login"))
+
         return funcao(*args, **kwargs)
 
     return verificar_login
@@ -75,7 +71,6 @@ def login_obrigatorio(funcao):
 @app.route("/")
 @login_obrigatorio
 def home():
-
     usuario_id = session["usuario_id"]
 
     treinos = listar_treinos(usuario_id)
@@ -345,6 +340,74 @@ def realizar_treino(id):
     return redirect(url_for("home"))
 
 
+@app.route("/treino/<int:id>/exportar-tcx")
+@login_obrigatorio
+def exportar_tcx(id):
+    treino = buscar_treino_por_id(id)
+
+    if treino is None:
+        return redirect(url_for("home"))
+
+    data_treino = treino["data_treino"]
+
+    if isinstance(data_treino, str):
+        data_treino = datetime.strptime(data_treino, "%Y-%m-%d").date()
+
+    data_inicio = datetime.combine(data_treino, datetime.min.time())
+    data_iso = data_inicio.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    titulo = escape(str(treino["titulo"]))
+    distancia = float(treino["distancia_metros"])
+    duracao_segundos = int(treino["duracao_minutos"]) * 60
+
+    tcx = f"""<?xml version="1.0" encoding="UTF-8"?>
+<TrainingCenterDatabase
+    xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+
+    <Activities>
+        <Activity Sport="Other">
+            <Id>{data_iso}</Id>
+
+            <Lap StartTime="{data_iso}">
+                <TotalTimeSeconds>{duracao_segundos}</TotalTimeSeconds>
+                <DistanceMeters>{distancia}</DistanceMeters>
+                <Calories>0</Calories>
+                <Intensity>Active</Intensity>
+                <TriggerMethod>Manual</TriggerMethod>
+
+                <Track>
+                    <Trackpoint>
+                        <Time>{data_iso}</Time>
+                        <DistanceMeters>0</DistanceMeters>
+                    </Trackpoint>
+
+                    <Trackpoint>
+                        <Time>{data_iso}</Time>
+                        <DistanceMeters>{distancia}</DistanceMeters>
+                    </Trackpoint>
+                </Track>
+            </Lap>
+
+            <Notes>{titulo}</Notes>
+        </Activity>
+    </Activities>
+
+</TrainingCenterDatabase>
+"""
+
+    nome_arquivo = f"treino_{id}.tcx"
+
+    return Response(
+        tcx,
+        mimetype="application/vnd.garmin.tcx+xml",
+        headers={
+            "Content-Disposition": f"attachment; filename={nome_arquivo}"
+        }
+    )
+
+
 # ============================================================
 # ROTAS DE MODELOS DE TREINO
 # ============================================================
@@ -372,6 +435,7 @@ def salvar_modelo():
     )
 
     usuario_id = session["usuario_id"]
+
     cadastrar_treino_modelo(
         usuario_id,
         titulo,
@@ -401,9 +465,7 @@ def tela_cadastro_usuario():
 def cadastrar_usuario_app():
     nome = request.form["nome"]
     email = request.form["email"]
-    senha = generate_password_hash(
-    request.form["senha"]
-)
+    senha = generate_password_hash(request.form["senha"])
 
     usuario_existente = buscar_usuario_por_email(email)
 
@@ -419,27 +481,26 @@ def cadastrar_usuario_app():
 def tela_login():
     return render_template("login.html")
 
+
 @app.route("/recuperar-senha")
 def recuperar_senha():
-
     return render_template("recuperar_senha.html")
+
 
 @app.route("/alterar-senha")
 def tela_alterar_senha():
-
     return render_template(
         "alterar_senha.html"
     )
 
+
 @app.route("/enviar-recuperacao", methods=["POST"])
 def enviar_recuperacao():
-
     email = request.form["email"]
 
     usuario = buscar_usuario_por_email(email)
 
     if not usuario:
-
         return render_template(
             "recuperar_senha.html",
             erro="Email não encontrado"
@@ -455,22 +516,18 @@ def enviar_recuperacao():
 
 @app.route("/salvar-nova-senha", methods=["POST"])
 def salvar_nova_senha():
-
     email = request.form["email"]
 
     nova_senha = request.form["nova_senha"]
     confirmar_senha = request.form["confirmar_senha"]
 
     if nova_senha != confirmar_senha:
-
         return render_template(
             "alterar_senha.html",
             erro="As senhas não coincidem"
         )
 
-    senha_hash = generate_password_hash(
-        nova_senha
-    )
+    senha_hash = generate_password_hash(nova_senha)
 
     conexao = conectar()
     cursor = conexao.cursor()
@@ -493,9 +550,9 @@ def salvar_nova_senha():
         url_for("tela_login")
     )
 
+
 @app.route("/logar", methods=["POST"])
 def logar():
-
     email = request.form["email"]
     senha = request.form["senha"]
 
@@ -512,12 +569,10 @@ def logar():
     senha_valida = False
 
     if senha_salva.startswith("scrypt:"):
-
         senha_valida = check_password_hash(
             senha_salva,
             senha
         )
-
     else:
         senha_valida = senha_salva == senha
 

@@ -396,12 +396,33 @@
                                     </a>
 
                                     <a
+                                        href="/treino/{{ treino.id }}"
+                                        class="acao-btn"
+                                        title="Ver detalhes"
+                                    >
+                                         <i class="fa-solid fa-eye"></i>
+                                    </a>
+
+                                    <a
                                         href="/treino/{{ treino.id }}/editar"
                                         class="acao-btn"
                                         title="Editar treino"
                                     >
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
+
+                                        {% if treino.status == "realizado" %}
+
+                                    <a
+                                        href="{{ url_for('exportar_tcx', id=treino.id) }}"
+                                        class="acao-btn"
+                                        title="Baixar TCX"
+                                    >
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+
+                                    {% endif %}
+
 
                                     <form
                                         action="/treino/{{ treino.id }}/excluir"
