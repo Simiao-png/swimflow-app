@@ -125,6 +125,7 @@ CADASTRO
 .equipamento-item{
     display: flex;
     justify-content: space-between;
+    transform: translateX(10px);
     align-items: center;
 
     background: #2b3d61;
@@ -2374,14 +2375,12 @@ body {
     grid-column: 1 / -1;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 15px;
 
     background: transparent;
     border: none;
     box-shadow: none;
-
-    transform: translateX(10px);
 
     margin-bottom: -5px;
 
@@ -2618,4 +2617,92 @@ body {
     box-shadow: 0 0 12px rgba(0,191,255,0.4);
 
     display: block;
+}
+
+.perfil-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.perfil-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15, 35, 70, 0.92);
+    border: 1px solid #00bfff;
+    border-radius: 18px;
+    padding: 28px;
+    color: white;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.25);
+}
+
+.perfil-card h1 {
+    margin-bottom: 8px;
+}
+
+.perfil-card p {
+    margin-bottom: 24px;
+    color: #c7d8f2;
+}
+
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.perfil-form label {
+    color: #00bfff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.perfil-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #31456f;
+    color: white;
+    outline: none;
+}
+
+.perfil-form input::placeholder {
+    color: #b8c4d6;
+}
+
+.perfil-form button {
+    margin-top: 14px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #00bfff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.perfil-form button:hover {
+    filter: brightness(1.1);
+}
+
+.menu-usuario {
+    display: flex;
+    flex-direction: column;
+    margin-left: 48px;
+    margin-top: 6px;
+    gap: 6px;
+}
+
+.menu-usuario a {
+    color: #00bfff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.menu-usuario a:hover {
+    opacity: 0.8;
 }

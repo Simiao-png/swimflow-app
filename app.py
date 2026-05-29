@@ -7,7 +7,7 @@ from functools import wraps
 import calendar
 from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email
+from modelos.usuarios import cadastrar_usuario, buscar_usuario_por_email, buscar_usuario_por_id, atualizar_perfil
 from database.connection import conectar
 from xml.sax.saxutils import escape
 
@@ -73,6 +73,8 @@ def login_obrigatorio(funcao):
 def home():
     usuario_id = session["usuario_id"]
 
+    usuario = buscar_usuario_por_id(usuario_id)
+
     treinos = listar_treinos(usuario_id)
     treinos_modelo = listar_treinos_modelo(usuario_id)
     resumo = buscar_resumo(usuario_id)
@@ -82,7 +84,8 @@ def home():
         treinos=treinos,
         treinos_modelo=treinos_modelo,
         resumo=resumo,
-        usuario_nome=session.get("usuario_nome")
+        usuario=usuario,
+        usuario_nome=usuario["nome_exibicao"] or usuario["nome"]
     )
 
 
@@ -594,6 +597,38 @@ def logout():
 
     return redirect(url_for("tela_login"))
 
+@app.route("/perfil", methods=["GET", "POST"])
+def perfil():
+    if "usuario_id" not in session:
+        return redirect(url_for("tela_login"))
+
+    usuario_id = session["usuario_id"]
+
+    if request.method == "POST":
+        nome_exibicao = request.form.get("nome_exibicao") or None
+        idade = request.form.get("idade") or None
+        peso_kg = request.form.get("peso_kg") or None
+        altura_cm = request.form.get("altura_cm") or None
+
+        atualizar_perfil(
+            usuario_id,
+            nome_exibicao,
+            idade,
+            peso_kg,
+            altura_cm
+        )
+
+        if nome_exibicao:
+            session["usuario_nome"] = nome_exibicao
+
+        return redirect(url_for("home"  ))
+
+    usuario = buscar_usuario_por_id(usuario_id)
+
+    return render_template(
+        "perfil.html",
+        usuario=usuario
+    )
 
 # ============================================================
 # EXECUÇÃO DO APP

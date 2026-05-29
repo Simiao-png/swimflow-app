@@ -1,26 +1,10 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="pt-br">
+{% block title %}Nova Senha - SwimFlow{% endblock %}
 
-<head>
+{% block content %}
 
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Recuperar senha</title>
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
-
-</head>
-
-<body class="pagina-auth">
+<div class="pagina-auth">
 
     <div class="auth-container">
 
@@ -30,7 +14,7 @@
             class="auth-card"
         >
 
-            <h1>🔐 Recuperar senha</h1>
+            <h1>🔐 Nova Senha</h1>
 
             <p>
                 Crie sua nova senha
@@ -44,10 +28,11 @@
 
             <div class="form-group">
 
-                <label>Nova senha</label>
+                <label for="nova_senha">Nova senha</label>
 
                 <input
                     type="password"
+                    id="nova_senha"
                     name="nova_senha"
                     required
                 >
@@ -56,10 +41,13 @@
 
             <div class="form-group">
 
-                <label>Confirmar nova senha</label>
+                <label for="confirmar_senha">
+                    Confirmar nova senha
+                </label>
 
                 <input
                     type="password"
+                    id="confirmar_senha"
                     name="confirmar_senha"
                     required
                 >
@@ -68,11 +56,9 @@
 
             <button
                 type="submit"
-                class="btn-auth"
+                class="btn-salvar"
             >
-
                 Salvar nova senha
-
             </button>
 
             <a
@@ -86,6 +72,6 @@
 
     </div>
 
-</body>
+</div>
 
-</html>
+{% endblock %}

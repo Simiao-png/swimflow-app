@@ -22,15 +22,27 @@
                 class="foto-perfil"
             >
 
-            <h2>
-                Olá, {{ usuario_nome }} 👋
-            </h2>
+            <div class="dados-usuario">
+
+                <h2>
+                    Olá, {{ usuario_nome }} 👋
+                </h2>
+
+                <div class="menu-usuario">
+
+                    <a href="{{ url_for('perfil') }}">
+                        ⚙️ Meu Perfil
+                    </a>
+
+                        <a href="{{ url_for('logout') }}">
+                        🚪 Sair
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
-
-        <a href="{{ url_for('logout') }}">
-            Sair
-        </a>
 
     </div>
 
