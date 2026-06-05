@@ -1,0 +1,495 @@
+{% extends "base.html" %}
+
+{% block title %}SwimFlow{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+>
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+
+    <div class="usuario-logado">
+
+        <div class="perfil-topo">
+
+            <img
+                src="{{ url_for('static', filename='img/avatar-padrao.jpg') }}"
+                class="foto-perfil"
+            >
+
+            <div class="dados-usuario">
+
+                <h2>
+                    Olá, {{ usuario_nome }} 👋
+                </h2>
+
+                <div class="menu-usuario">
+
+                    <a href="{{ url_for('perfil') }}">
+                        ⚙️ Meu Perfil
+                    </a>
+
+                        <a href="{{ url_for('logout') }}">
+                        🚪 Sair
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="flip-container">
+
+        <div class="flip-card">
+
+            <section class="cadastro-card front-card">
+
+                <div class="cadastro-topo">
+
+                    <div>
+                        <h1>Cadastro de Treino</h1>
+                        <p>Adicione seus treinos de natação</p>
+                    </div>
+
+                    <button class="btn-flip" type="button">
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+
+                </div>
+
+                <form action="/salvar" method="POST" class="cadastro-form">
+
+                    <div class="form-group">
+                        <label>Data do treino</label>
+                        <input type="date" name="data_treino" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Título do treino</label>
+                        <input
+                            type="text"
+                            name="titulo"
+                            placeholder="Ex: Treino regenerativo"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Tipo de treino</label>
+                            <select name="estilo">
+                                <option value="Crawl">Crawl</option>
+                                <option value="Costas">Costas</option>
+                                <option value="Peito">Peito</option>
+                                <option value="Borboleta">Borboleta</option>
+                                <option value="Medley">Medley</option>
+                                <option value="Educativo">Educativo</option>
+                                <option value="Pernada">Pernada</option>
+                                <option value="Braçada">Braçada</option>
+                                <option value="Técnica">Técnica</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tamanho da piscina</label>
+                            <select name="tamanho_piscina">
+                                <option value="12.5">12.5m</option>
+                                <option value="25">25m</option>
+                                <option value="50">50m</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Número de voltas</label>
+                            <input
+                                type="number"
+                                name="voltas"
+                                placeholder="Ex: 30"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Duração em minutos</label>
+                            <input
+                                type="number"
+                                name="duracao_minutos"
+                                placeholder="Ex: 45"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Equipamentos</label>
+
+                        <div class="equipamentos-grid">
+
+                            <label class="equipamento-item">
+                                <span>Palmar</span>
+                                <input type="checkbox" name="equipamentos" value="Palmar">
+                            </label>
+
+                            <label class="equipamento-item">
+                                <span>Pullbuoy</span>
+                                <input type="checkbox" name="equipamentos" value="Pullbuoy">
+                            </label>
+
+                            <label class="equipamento-item">
+                                <span>Prancha</span>
+                                <input type="checkbox" name="equipamentos" value="Prancha">
+                            </label>
+
+                            <label class="equipamento-item">
+                                <span>Pé de pato</span>
+                                <input type="checkbox" name="equipamentos" value="Pé de pato">
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea
+                            name="observacoes"
+                            rows="5"
+                            placeholder="Descreva o treino..."
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-salvar">
+                        💾 Salvar treino
+                    </button>
+
+                </form>
+
+            </section>
+
+            <section class="cadastro-card back-card">
+
+                <div class="cadastro-topo">
+
+                    <div>
+                        <h1>Programar Treino</h1>
+                        <p>Crie treinos para usar no calendário</p>
+                    </div>
+
+                    <button class="btn-flip" type="button">
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+
+                </div>
+
+                <form action="/salvar-modelo" method="POST" class="cadastro-form">
+
+                    <div class="form-group">
+                        <label>Título do treino</label>
+                        <input
+                            type="text"
+                            name="titulo"
+                            placeholder="Ex: Longão progressivo"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Tipo de treino</label>
+                            <select name="estilo">
+                                <option value="Crawl">Crawl</option>
+                                <option value="Costas">Costas</option>
+                                <option value="Peito">Peito</option>
+                                <option value="Borboleta">Borboleta</option>
+                                <option value="Medley">Medley</option>
+                                <option value="Educativo">Educativo</option>
+                                <option value="Pernada">Pernada</option>
+                                <option value="Braçada">Braçada</option>
+                                <option value="Técnica">Técnica</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tamanho da piscina</label>
+                            <select name="tamanho_piscina">
+                                <option value="12.5">12.5m</option>
+                                <option value="25">25m</option>
+                                <option value="50">50m</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Número de voltas</label>
+                            <input
+                                type="number"
+                                name="voltas"
+                                placeholder="Ex: 40"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Duração em minutos</label>
+                            <input
+                                type="number"
+                                name="duracao_minutos"
+                                placeholder="Ex: 90"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea
+                            name="observacoes"
+                            rows="5"
+                            placeholder="Descreva o treino..."
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-salvar">
+                        🗓 Programar treino
+                    </button>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <div class="area-principal">
+
+        <section class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <p>🏊 Total de treinos</p>
+                <h3>{{ resumo.total_treinos }}</h3>
+            </div>
+
+            <div class="dashboard-card">
+                <p>📏 Distância total</p>
+                <h3>{{ resumo.distancia_total }}m</h3>
+            </div>
+
+            <div class="dashboard-card">
+                <p>⏱ Tempo total</p>
+                <h3>{{ resumo.tempo_total }} min</h3>
+            </div>
+
+        </section>
+
+        <section class="historico">
+
+            <div class="historico-topo">
+
+                <div>
+                    <h2>Histórico de Treinos</h2>
+                    <p>Todos os seus treinos registrados</p>
+                </div>
+
+                <a href="/calendario" class="btn-calendario">
+                    <i class="fa-solid fa-calendar"></i>
+                    Calendário
+                </a>
+
+            </div>
+
+            <div class="tabela-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Piscina</th>
+                            <th>Voltas</th>
+                            <th>Distância</th>
+                            <th>Duração</th>
+                            <th>Ritmo/100m</th>
+                            <th>Equipamentos</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for treino in treinos %}
+
+                        <tr class="
+                            linha-treino
+
+                            {% if treino.status == 'programado' %}
+                                treino-programado
+                            {% endif %}
+
+                            {% if treino.status == 'realizado' %}
+                                treino-realizado
+                            {% endif %}
+                        ">
+
+                            <td>{{ treino.data_treino }}</td>
+
+                            <td>
+                                <a
+                                    href="/treino/{{ treino.id }}"
+                                    class="titulo-treino"
+                                >
+                                    {{ treino.titulo }}
+                                </a>
+                            </td>
+
+                            <td>{{ treino.estilo }}</td>
+
+                            <td>{{ treino.tamanho_piscina }}m</td>
+
+                            <td>{{ treino.voltas }}</td>
+
+                            <td>{{ treino.distancia_metros }}m</td>
+
+                            <td>{{ treino.duracao_minutos }} min</td>
+
+                            <td>{{ treino.pace }}</td>
+
+                            <td>{{ treino.equipamentos }}</td>
+
+                            <td>
+
+                                <div class="acoes-hover">
+
+                                    {% if treino.status == 'programado' %}
+
+                                    <form
+                                        action="/treino/{{ treino.id }}/realizar"
+                                        method="POST"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="acao-btn concluir"
+                                            title="Marcar como realizado"
+                                        >
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+                                    </form>
+
+                                    {% endif %}
+
+                                    <a
+                                        href="/treino/{{ treino.id }}"
+                                        class="acao-btn"
+                                        title="Ver detalhes"
+                                    >
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+
+                                    <a
+                                        href="/treino/{{ treino.id }}"
+                                        class="acao-btn"
+                                        title="Ver detalhes"
+                                    >
+                                         <i class="fa-solid fa-eye"></i>
+                                    </a>
+
+                                    <a
+                                        href="/treino/{{ treino.id }}/editar"
+                                        class="acao-btn"
+                                        title="Editar treino"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+
+                                        {% if treino.status == "realizado" %}
+
+                                    <a
+                                        href="{{ url_for('exportar_tcx', id=treino.id) }}"
+                                        class="acao-btn"
+                                        title="Baixar TCX"
+                                    >
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+
+                                    {% endif %}
+
+
+                                    <form
+                                        action="/treino/{{ treino.id }}/excluir"
+                                        method="POST"
+                                        onsubmit="return confirm('Tem certeza?');"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="acao-btn excluir"
+                                            title="Excluir treino"
+                                        >
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    const flipButtons = document.querySelectorAll('.btn-flip');
+
+    const flipCard = document.querySelector('.flip-card');
+
+    flipButtons.forEach(botao => {
+
+        botao.addEventListener('click', () => {
+
+            flipCard.classList.toggle('virado');
+
+        });
+
+    });
+
+</script>
+
+{% endblock %}

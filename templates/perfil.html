@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="perfil-page">
+    <div class="perfil-card">
+    <h1>Meu Perfil</h1>
+
+    <form method="POST" action="{{ url_for('perfil') }}" class="perfil-form">
+
+        <label>Como gostaria de ser chamado</label>
+        <input
+            type="text"
+            name="nome_exibicao"
+            value="{{ usuario.nome_exibicao or '' }}"
+            placeholder="Ex: Silas"
+        >
+
+        <label>Idade</label>
+        <input
+            type="number"
+            name="idade"
+            min="1"
+            max="120"
+            value="{{ usuario.idade or '' }}"
+            placeholder="Ex: 34"
+        >
+
+        <label>Peso atual (kg)</label>
+        <input
+            type="number"
+            name="peso_kg"
+            step="0.01"
+            min="20"
+            max="300"
+            value="{{ usuario.peso_kg or '' }}"
+            placeholder="Ex: 82.50"
+        >
+
+        <label>Altura (cm)</label>
+        <input
+            type="number"
+            name="altura_cm"
+            step="0.01"
+            min="50"
+            max="250"
+            value="{{ usuario.altura_cm or '' }}"
+            placeholder="Ex: 178"
+        >
+
+        <button type="submit">Salvar perfil</button>
+
+    </form>
+    </div>
+</div>
+
+{% endblock %}

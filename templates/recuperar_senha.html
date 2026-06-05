@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Recuperar Senha - SwimFlow{% endblock %}
+
+{% block content %}
+
+<div class="pagina-auth">
+
+    <div class="auth-container">
+
+        <form
+            action="/enviar-recuperacao"
+            method="POST"
+            class="auth-card"
+        >
+
+            <h1>🔐 Recuperar Senha</h1>
+
+            <p>
+                Digite seu email para recuperar sua senha
+            </p>
+
+            <div class="form-group">
+
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn-salvar"
+            >
+                Enviar recuperação
+            </button>
+
+            <a
+                href="/login"
+                class="link-auth"
+            >
+                Voltar ao login
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

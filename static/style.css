@@ -1,0 +1,2708 @@
+body{
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    font-family: Arial, sans-serif;
+
+    background: #081229;
+    color: white;
+}
+
+/* =========================
+PÁGINA INICIAL
+========================= */
+
+.container{
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 25px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+/* =========================
+CADASTRO
+========================= */
+
+.cadastro-card{
+    height: calc(100vh - 50px);
+
+    background: #1a2740;
+
+    padding: 30px;
+
+    border-radius: 24px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+}
+
+.cadastro-header h1{
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    font-size: 32px;
+}
+
+.cadastro-header p{
+    margin-bottom: 30px;
+
+    color: #9bb4d4;
+}
+
+.cadastro-form{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label,
+.cadastro-form label{
+    color: #00bfff;
+
+    font-weight: bold;
+
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.cadastro-form input,
+.cadastro-form select,
+.cadastro-form textarea{
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #2b3d61;
+
+    color: white;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+}
+
+.cadastro-form input::placeholder,
+.cadastro-form textarea::placeholder{
+    color: #b7c4db;
+}
+
+.cadastro-form textarea{
+    resize: none;
+}
+
+.equipamentos-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.equipamento-item{
+    display: flex;
+    justify-content: space-between;
+    transform: translateX(10px);
+    align-items: center;
+
+    background: #2b3d61;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.equipamento-item input{
+    width: 14px;
+    height: 14px;
+
+    margin: 0;
+}
+
+.btn-salvar{
+    width: 100%;
+
+    background: #00bfff;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-salvar:hover{
+    background: #00a6e6;
+
+    transform: translateY(-2px);
+}
+
+/* =========================
+ÁREA PRINCIPAL
+========================= */
+
+.area-principal{
+    height: calc(100vh - 50px);
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    overflow: hidden;
+}
+
+/* =========================
+DASHBOARD
+========================= */
+
+.dashboard-cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+
+    flex-shrink: 0;
+}
+
+.dashboard-card{
+    position: relative;
+
+    min-height: 120px;
+
+    padding: 24px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(135deg, rgba(0, 191, 255, 0.22), rgba(49, 100, 224, 0.14)),
+        #101b30;
+
+    border: 1px solid rgba(0, 191, 255, 0.25);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+    overflow: hidden;
+}
+
+.dashboard-card::after{
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -35px;
+    top: -35px;
+
+    background: rgba(0, 191, 255, 0.12);
+
+    border-radius: 50%;
+}
+
+.dashboard-card p{
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 14px;
+
+    color: #c8d4ec;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dashboard-card h3{
+    position: relative;
+    z-index: 1;
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 42px;
+    font-weight: 800;
+}
+
+/* =========================
+HISTÓRICO
+========================= */
+
+.historico{
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.historico-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    margin-bottom: 18px;
+}
+
+.historico-topo h2{
+    margin: 0 0 6px;
+
+    font-size: 32px;
+}
+
+.historico-topo p{
+    margin: 0;
+
+    color: #9bb4d4;
+}
+
+.btn-calendario{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+
+    background: #00bfff;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 14px 22px;
+
+    border-radius: 14px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.btn-calendario:hover{
+    background: #00a6e6;
+
+    transform: translateY(-2px);
+}
+
+.tabela-wrapper{
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: auto;
+
+    border-radius: 20px;
+}
+
+table{
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #1a2740;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+th{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    background: #101b30;
+
+    color: #00bfff;
+
+    padding: 16px;
+
+    text-align: left;
+
+    font-size: 14px;
+}
+
+td{
+    padding: 16px;
+
+    border-bottom: 1px solid #2d4266;
+
+    color: #e2e8f0;
+
+    font-size: 14px;
+}
+
+td a{
+    color: #00bfff;
+
+    font-weight: bold;
+    text-decoration: none;
+}
+
+tr:hover{
+    background: #223250;
+}
+
+.acoes-hover{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.2s;
+}
+
+.linha-treino:hover .acoes-hover{
+    opacity: 1;
+    visibility: visible;
+}
+
+.acao-btn{
+    background: transparent;
+
+    border: none;
+
+    color: #9bb4d4;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.acao-btn:hover{
+    color: #00bfff;
+
+    transform: scale(1.15);
+}
+
+.acao-btn.excluir:hover{
+    color: #ff4d4d;
+}
+
+.acoes-hover form{
+    margin: 0;
+}
+
+/* =========================
+DETALHE TREINO
+========================= */
+
+.detalhe-container{
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+}
+
+.detalhe-card{
+    width: 850px;
+
+    background: #1a2740;
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    box-sizing: border-box;
+}
+
+.detalhe-card h1{
+    font-size: 56px;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.data{
+    color: #8fa8d6;
+
+    font-size: 18px;
+
+    margin-bottom: 40px;
+}
+
+/* =========================
+MÉTRICAS
+========================= */
+
+.metricas{
+    display: flex;
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.metrica{
+    flex: 1;
+
+    background: #243552;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+}
+
+.metrica h2{
+    margin: 0 0 12px;
+
+    font-size: 50px;
+
+    color: #00bfff;
+}
+
+.metrica span{
+    color: #9bb4d4;
+
+    font-size: 18px;
+}
+
+/* =========================
+INFORMAÇÕES
+========================= */
+
+.info-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.info-box{
+    background: #243552;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    min-height: 120px;
+
+    box-sizing: border-box;
+}
+
+.info-box strong{
+    display: block;
+
+    color: #00bfff;
+
+    font-size: 18px;
+
+    margin-bottom: 16px;
+}
+
+.info-box p{
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.observacoes-box{
+    background: #243552;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    margin-bottom: 30px;
+}
+
+.observacoes-box strong{
+    display: block;
+
+    color: #00bfff;
+
+    margin-bottom: 16px;
+
+    font-size: 18px;
+}
+
+.observacoes-box p{
+    margin: 0;
+
+    font-size: 20px;
+}
+
+/* =========================
+BOTÕES
+========================= */
+
+.btn-voltar{
+    display: inline-block;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    background: #00bfff;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.btn-voltar:hover{
+    background: #08a6dd;
+}
+
+.btn-voltar-home{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 30px;
+
+    color: #00bfff;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.btn-voltar-home:hover{
+    color: #5fd6ff;
+
+    transform: translateX(-3px);
+}
+
+/* =========================
+CALENDÁRIO
+========================= */
+
+.container-calendario{
+    width: 95%;
+
+    margin: auto;
+
+    padding: 50px 0;
+}
+
+.topo-calendario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+.topo-calendario h1{
+    margin: 0;
+
+    font-size: 42px;
+
+    letter-spacing: 1px;
+
+    color: white;
+}
+
+.btn-mes{
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #1a2740;
+
+    border: none;
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    color: #00bfff;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-mes:hover{
+    background: #243552;
+
+    transform: scale(1.08);
+
+    color: white;
+}
+
+.calendario{
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #1a2740;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+}
+
+.calendario th{
+    background: #101b30;
+
+    color: #00bfff;
+
+    padding: 18px;
+
+    text-align: center;
+}
+
+.calendario td{
+    width: 14.2%;
+    height: 150px;
+
+    vertical-align: top;
+
+    padding: 10px;
+
+    border: 1px solid #2d4266;
+
+    box-sizing: border-box;
+}
+
+.calendario strong{
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 18px;
+}
+
+.treino-link{
+    display: block;
+
+    width: 100%;
+
+    background: #3164e0;
+
+    color: white;
+
+    border: none;
+
+    text-decoration: none;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.treino-link:hover{
+    background: #4a7dff;
+}
+
+.treino-link.programado{
+    background: #eab308;
+    color: #081229;
+}
+
+.treino-link.programado:hover{
+    background: #facc15;
+}
+
+/* =========================
+MODAL
+========================= */
+
+.modal{
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.modal-content{
+    width: 700px;
+    max-width: 90%;
+
+    background: #1a2740;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    position: relative;
+
+    box-sizing: border-box;
+
+    color: white;
+
+    animation: aparecer 0.2s ease;
+}
+
+.close-modal{
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    font-size: 28px;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.close-modal:hover{
+    color: #00bfff;
+}
+
+.modal-content h2{
+    margin-top: 0;
+    margin-bottom: 25px;
+
+    font-size: 34px;
+}
+
+.modal-info p{
+    margin-bottom: 16px;
+
+    font-size: 18px;
+
+    color: #dbeafe;
+}
+
+.modal-info strong{
+    color: #00bfff;
+}
+
+/* =========================
+MODAL NOVO
+========================= */
+
+.treino-modal{
+    width: 850px;
+    max-width: 95%;
+
+    background: #1a2740;
+
+    border-radius: 24px;
+
+    padding: 40px;
+
+    color: white;
+
+    box-sizing: border-box;
+}
+
+.treino-modal h2{
+    font-size: 56px;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    color: white;
+}
+
+.metricas-modal{
+    display: flex;
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.metrica-modal{
+    flex: 1;
+
+    background: #243552;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+}
+
+.metrica-modal h3{
+    margin: 0 0 12px;
+
+    font-size: 50px;
+
+    color: #00bfff;
+}
+
+.metrica-modal span{
+    color: #9bb4d4;
+
+    font-size: 18px;
+}
+
+.info-grid-modal{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.info-box-modal{
+    background: #243552;
+
+    padding: 25px;
+
+    border-radius: 18px;
+}
+
+.info-box-modal strong{
+    display: block;
+
+    color: #00bfff;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+.info-box-modal p{
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: white;
+}
+
+.observacoes-modal{
+    background: #243552;
+
+    padding: 25px;
+
+    border-radius: 18px;
+}
+
+.observacoes-modal strong{
+    display: block;
+
+    color: #00bfff;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+.observacoes-modal p{
+    margin: 0;
+
+    font-size: 20px;
+
+    color: white;
+}
+
+/* =========================
+EDITAR TREINO
+========================= */
+
+.editar-page{
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    background: #000f2f;
+
+    overflow-y: auto;
+}
+
+.editar-container{
+    width: 100%;
+    max-width: 950px;
+
+    background: #1b2945;
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    box-sizing: border-box;
+}
+
+.editar-container h1{
+    font-size: 56px;
+
+    color: white;
+
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.editar-form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.editar-acoes{
+    display: flex;
+    gap: 20px;
+
+    margin-top: 10px;
+}
+
+/* =========================
+ANIMAÇÃO
+========================= */
+
+@keyframes aparecer{
+
+    from{
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================
+RESPONSIVO
+========================= */
+
+@media(max-width: 1100px){
+
+    body{
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .container{
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: visible;
+    }
+
+    .cadastro-card,
+    .area-principal{
+        width: 100%;
+        height: auto;
+
+        overflow: visible;
+    }
+
+    .dashboard-cards{
+        grid-template-columns: 1fr;
+    }
+
+    .historico{
+        overflow: visible;
+    }
+
+    .tabela-wrapper{
+        max-height: 500px;
+        overflow: auto;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .metricas,
+    .metricas-modal{
+        flex-direction: column;
+    }
+
+    .info-grid,
+    .info-grid-modal{
+        grid-template-columns: 1fr;
+    }
+
+    .editar-container h1,
+    .detalhe-card h1{
+        font-size: 40px;
+    }
+
+    .treino-modal h2{
+        font-size: 36px;
+    }
+
+    .calendario td{
+        height: 120px;
+    }
+
+    .topo-calendario h1{
+        font-size: 28px;
+    }
+
+}
+
+@media(max-width: 700px){
+
+    .calendario th{
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .calendario td{
+        height: 100px;
+
+        padding: 6px;
+    }
+
+    .treino-link{
+        font-size: 11px;
+
+        padding: 6px;
+    }
+
+    .modal-content{
+        padding: 25px;
+    }
+
+    .modal-content h2{
+        font-size: 26px;
+    }
+
+}
+
+/* =========================
+SCROLLBAR MODERNA
+========================= */
+
+.cadastro-card,
+.tabela-wrapper{
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+/* Chrome, Edge e Opera */
+
+.cadastro-card::-webkit-scrollbar,
+.tabela-wrapper::-webkit-scrollbar{
+    width: 8px;
+}
+
+.cadastro-card::-webkit-scrollbar-track,
+.tabela-wrapper::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+.cadastro-card::-webkit-scrollbar-thumb,
+.tabela-wrapper::-webkit-scrollbar-thumb{
+    background: transparent;
+
+    border-radius: 999px;
+
+    transition: 0.2s;
+}
+
+/* APARECE NO HOVER */
+
+.cadastro-card:hover::-webkit-scrollbar-thumb,
+.tabela-wrapper:hover::-webkit-scrollbar-thumb{
+    background: rgba(0, 191, 255, 0.35);
+}
+
+/* Hover mais forte */
+
+.cadastro-card:hover::-webkit-scrollbar-thumb:hover,
+.tabela-wrapper:hover::-webkit-scrollbar-thumb:hover{
+    background: rgba(0, 191, 255, 0.65);
+}
+
+.cadastro-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 30px;
+}
+
+.cadastro-topo h1{
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    font-size: 32px;
+}
+
+.cadastro-topo p{
+    margin: 0;
+
+    color: #9bb4d4;
+}
+
+.btn-flip{
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #243552;
+
+    color: #00bfff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-flip:hover{
+    background: #30466d;
+
+    transform: rotate(180deg);
+}
+
+/* =========================
+CORREÇÃO DA PÁGINA CALENDÁRIO
+========================= */
+
+body:has(.container-calendario){
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container-calendario{
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+/* =========================
+FLIP CARD
+========================= */
+
+.flip-container{
+    width: 100%;
+    height: calc(100vh - 50px);
+    perspective: 1500px;
+}
+
+.flip-card{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+.flip-card.virado{
+    transform: rotateY(180deg);
+}
+
+.front-card,
+.back-card{
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    overflow-y: auto;
+}
+
+.back-card{
+    transform: rotateY(180deg);
+}
+
+
+.calendario-layout{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 25px;
+    align-items: start;
+}
+
+.calendario-area{
+    min-width: 0;
+}
+
+.calendario{
+    width: 100%;
+}
+
+.calendario td{
+    height: 120px;
+}
+
+.sidebar-modelos{
+    background: #1a2740;
+    border-radius: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    max-height: 78vh;
+    overflow-y: auto;
+}
+
+.sidebar-modelos h2{
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+
+.lista-modelos{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.modelo-card{
+    background: #243552;
+    border-radius: 16px;
+    padding: 16px;
+    border-left: 4px solid #00bfff;
+}
+
+.modelo-card h3{
+    margin: 0 0 12px;
+    font-size: 17px;
+}
+
+.modelo-card p{
+    margin: 8px 0;
+    color: #dbeafe;
+    font-size: 14px;
+}
+
+@media(max-width: 1100px){
+
+    .calendario-layout{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.calendario td{
+    overflow: hidden;
+}
+
+.treino-link{
+    width: 100%;
+    max-width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    box-sizing: border-box;
+}
+
+.dia-calendario .treino-link{
+    display: block;
+}
+
+body:has(.detalhe-container){
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.detalhe-container{
+    align-items: flex-start;
+    padding: 30px;
+}
+
+.detalhe-card{
+    max-width: 760px;
+    padding: 32px;
+    margin-bottom: 50px;
+}
+
+.detalhe-card h1{
+    font-size: 44px;
+}
+
+.metricas{
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.metrica{
+    padding: 22px;
+}
+
+.metrica h2{
+    font-size: 38px;
+}
+
+.info-grid{
+    gap: 15px;
+}
+
+.info-box{
+    padding: 22px;
+    min-height: 95px;
+}
+
+.info-box p{
+    font-size: 20px;
+}
+
+.observacoes-box{
+    padding: 22px;
+}
+
+.acoes-treino{
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.acoes-treino form{
+    margin: 0;
+}
+
+.btn-editar,
+.btn-excluir{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 22px;
+
+    border: none;
+    border-radius: 12px;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-editar{
+    background: #3164e0;
+}
+
+.btn-editar:hover{
+    background: #4a7dff;
+    transform: translateY(-2px);
+}
+
+.btn-excluir{
+    background: #dc2626;
+}
+
+.btn-excluir:hover{
+    background: #ef4444;
+    transform: translateY(-2px);
+}
+
+body{
+    background:
+        linear-gradient(
+            rgba(1, 10, 30, 0.72),
+            rgba(1, 10, 30, 0.82)
+        ),
+        url("img/piscina-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.editar-body{
+    background:
+        linear-gradient(
+            rgba(1, 10, 30, 0.78),
+            rgba(1, 10, 30, 0.85)
+        ),
+        url("img/piscina-editar.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.editar-page{
+    background: transparent;
+}
+
+.editar-container{
+    background: rgba(27, 41, 69, 0.92);
+    backdrop-filter: blur(6px);
+}
+
+.editar-body{
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+.editar-page{
+    padding: 40px 0;
+}
+
+/* =========================
+RESPONSIVO MOBILE - TELA INICIAL
+========================= */
+
+@media(max-width: 768px){
+
+    body{
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .container{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        gap: 18px;
+        overflow: visible;
+    }
+
+    .flip-container{
+        height: auto;
+        min-height: 700px;
+    }
+
+    .flip-card{
+        min-height: 700px;
+    }
+
+    .cadastro-card{
+        height: auto;
+        min-height: auto;
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .cadastro-form{
+        gap: 16px;
+    }
+
+    .form-group{
+        gap: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    .cadastro-form input,
+    .cadastro-form select,
+    .cadastro-form textarea{
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    .equipamento-item{
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    .btn-salvar{
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    .area-principal{
+        height: auto;
+        overflow: visible;
+    }
+
+    .dashboard-cards{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .dashboard-card{
+        min-height: 75px;
+        padding: 16px 18px;
+        border-radius: 18px;
+    }
+
+    .dashboard-card p{
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .dashboard-card h3{
+        font-size: 26px;
+    }
+
+    .historico{
+        overflow: visible;
+    }
+
+    .historico-topo{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-top: 10px;
+    }
+
+    .historico-topo h2{
+        font-size: 26px;
+    }
+
+    .btn-calendario{
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+}
+
+/* =========================
+HISTÓRICO MOBILE EM CARDS
+========================= */
+
+@media(max-width: 768px){
+
+    .historico .tabela-wrapper{
+        overflow: visible;
+    }
+
+    .historico table,
+    .historico thead,
+    .historico tbody,
+    .historico th,
+    .historico td,
+    .historico tr{
+        display: block;
+        width: 100%;
+    }
+
+    .historico thead{
+        display: none;
+    }
+
+    .historico tr{
+        background: #1a2740;
+        border-radius: 18px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
+
+    .historico td{
+        border: none;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .historico td::before{
+        font-weight: bold;
+        color: #00bfff;
+    }
+
+    .historico td:nth-child(1)::before{ content: "Data"; }
+    .historico td:nth-child(2)::before{ content: "Título"; }
+    .historico td:nth-child(3)::before{ content: "Tipo"; }
+    .historico td:nth-child(4)::before{ content: "Piscina"; }
+    .historico td:nth-child(5)::before{ content: "Voltas"; }
+    .historico td:nth-child(6)::before{ content: "Distância"; }
+    .historico td:nth-child(7)::before{ content: "Duração"; }
+    .historico td:nth-child(8)::before{ content: "Ritmo"; }
+    .historico td:nth-child(9)::before{ content: "Equip."; }
+    .historico td:nth-child(10)::before{ content: "Ações"; }
+
+    .historico .acoes-hover{
+        opacity: 1;
+        visibility: visible;
+    }
+
+}
+
+/* =========================
+CALENDÁRIO MOBILE
+========================= */
+
+@media(max-width: 768px){
+
+    .container-calendario{
+        width: 100%;
+        padding: 20px 14px 60px;
+        box-sizing: border-box;
+    }
+
+    .calendario-layout{
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .topo-calendario{
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .topo-calendario h1{
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .btn-mes{
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .calendario-area{
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .calendario{
+        width: 820px;
+        min-width: 820px;
+        table-layout: fixed;
+    }
+
+    .calendario th,
+    .calendario td{
+        width: 117px;
+        min-width: 117px;
+        max-width: 117px;
+    }
+
+    .calendario th{
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .calendario td{
+        height: 105px;
+        padding: 7px;
+    }
+
+    .calendario strong{
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .treino-link{
+        font-size: 11px;
+        padding: 7px;
+        border-radius: 8px;
+    }
+
+    .sidebar-modelos{
+        width: 100%;
+        max-height: none;
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .sidebar-modelos h2{
+        font-size: 22px;
+    }
+
+    .modelo-card{
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+}
+
+/* =========================
+DETALHE MOBILE
+========================= */
+
+@media(max-width: 768px){
+
+    .detalhe-container{
+        padding: 20px 14px;
+    }
+
+    .detalhe-card{
+        width: 100%;
+        max-width: 100%;
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .detalhe-card h1{
+        font-size: 30px;
+    }
+
+    .metricas{
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .metrica{
+        padding: 14px 8px;
+    }
+
+    .metrica h2{
+        font-size: 22px;
+    }
+
+    .metrica span{
+        font-size: 11px;
+    }
+
+    .info-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .acoes-treino{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .btn-voltar,
+    .btn-editar,
+    .btn-excluir,
+    .btn-concluir{
+        width: 100%;
+
+        justify-content: center;
+
+        box-sizing: border-box;
+}
+
+}
+
+@media(max-width: 768px){
+
+    .calendario{
+        width: 100%;
+        min-width: 100%;
+        table-layout: fixed;
+    }
+
+    .calendario th,
+    .calendario td{
+        width: 14.28%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .calendario td{
+        height: 78px;
+        padding: 4px;
+    }
+
+    .calendario strong{
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .treino-link{
+        font-size: 8px;
+        padding: 4px;
+        border-radius: 6px;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .calendario td{
+        height: 78px;
+        max-height: 78px;
+        overflow: hidden;
+    }
+
+    .calendario .treino-link{
+        height: 18px;
+        line-height: 10px;
+        padding: 4px;
+        margin-bottom: 3px;
+
+        font-size: 8px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
+
+/* =========================
+AJUSTE MOBILE - DETALHE DO TREINO
+========================= */
+
+@media(max-width: 768px){
+
+    .detalhe-container{
+        padding: 18px 12px;
+        align-items: flex-start;
+    }
+
+    .detalhe-card{
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        border-radius: 22px;
+    }
+
+    .detalhe-card h1{
+        font-size: 26px;
+        line-height: 1.15;
+    }
+
+    .data{
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+
+    .metricas{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .metrica{
+        padding: 16px;
+    }
+
+    .metrica h2{
+        font-size: 28px;
+    }
+
+    .metrica span{
+        font-size: 13px;
+    }
+
+    .info-grid{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .info-box{
+        padding: 16px;
+        min-height: auto;
+    }
+
+    .info-box strong{
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .info-box p{
+        font-size: 16px;
+    }
+
+    .observacoes-box{
+        padding: 16px;
+    }
+
+    .observacoes-box strong{
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .observacoes-box p{
+        font-size: 15px;
+    }
+
+    .acoes-treino{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-voltar,
+    .btn-editar,
+    .btn-excluir{
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+}
+
+/* =========================
+FORÇAR MOBILE - DETALHE DO TREINO
+========================= */
+
+@media(max-width: 768px){
+
+    .detalhe-container{
+        padding: 16px 10px !important;
+        align-items: flex-start !important;
+    }
+
+    .detalhe-card{
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 18px !important;
+        border-radius: 20px !important;
+    }
+
+    .detalhe-card h1{
+        font-size: 24px !important;
+        line-height: 1.15 !important;
+    }
+
+    .data{
+        font-size: 12px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .metricas{
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .metrica{
+        width: 100% !important;
+        padding: 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    .metrica h2{
+        font-size: 26px !important;
+    }
+
+    .metrica span{
+        font-size: 12px !important;
+    }
+
+    .info-grid{
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .info-box{
+        padding: 14px !important;
+        min-height: auto !important;
+    }
+
+    .info-box strong{
+        font-size: 13px !important;
+        margin-bottom: 7px !important;
+    }
+
+    .info-box p{
+        font-size: 15px !important;
+    }
+
+    .observacoes-box{
+        padding: 14px !important;
+    }
+
+    .observacoes-box strong{
+        font-size: 13px !important;
+    }
+
+    .observacoes-box p{
+        font-size: 14px !important;
+    }
+
+    .acoes-treino{
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .btn-voltar,
+    .btn-editar,
+    .btn-excluir{
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+}
+
+/* =========================
+CORREÇÃO FINAL MOBILE - DETALHE DO TREINO
+========================= */
+
+@media(max-width: 768px){
+
+    .detalhe-card.treino-modal{
+        width: 96% !important;
+        max-width: 96% !important;
+        padding: 18px !important;
+        border-radius: 20px !important;
+    }
+
+    .detalhe-card.treino-modal h1{
+        font-size: 24px !important;
+        line-height: 1.15 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .detalhe-card.treino-modal .data{
+        font-size: 12px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .detalhe-card.treino-modal .metricas,
+    .detalhe-card.treino-modal .metricas-modal{
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .detalhe-card.treino-modal .metrica,
+    .detalhe-card.treino-modal .metrica-modal{
+        width: 100% !important;
+        padding: 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    .detalhe-card.treino-modal .metrica h2,
+    .detalhe-card.treino-modal .metrica-modal h3{
+        font-size: 26px !important;
+    }
+
+    .detalhe-card.treino-modal .info-grid,
+    .detalhe-card.treino-modal .info-grid-modal{
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .detalhe-card.treino-modal .info-box,
+    .detalhe-card.treino-modal .info-box-modal,
+    .detalhe-card.treino-modal .observacoes-box,
+    .detalhe-card.treino-modal .observacoes-modal{
+        padding: 14px !important;
+        min-height: auto !important;
+    }
+
+    .detalhe-card.treino-modal .acoes-treino{
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .detalhe-card.treino-modal .btn-voltar,
+    .detalhe-card.treino-modal .btn-editar,
+    .detalhe-card.treino-modal .btn-excluir{
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+}
+.btn-concluir{
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-concluir:hover{
+    background: #22c55e;
+
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   STATUS DO TREINO
+======================================== */
+
+.treino-programado{
+    background: rgba(255, 193, 7, 0.14);
+}
+
+.treino-programado:hover{
+    background: rgba(255, 193, 7, 0.22);
+}
+
+/* ========================================
+   BOTÕES DE AÇÃO
+======================================== */
+
+.acoes-hover{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.acoes-hover form{
+    margin: 0;
+}
+
+.acao-btn{
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #243552;
+
+    color: #cbd5e1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.acao-btn:hover{
+    transform: translateY(-2px);
+
+    background: #31476d;
+
+    color: white;
+}
+
+.acao-btn.concluir:hover{
+    background: #15803d;
+
+    color: white;
+}
+
+.acao-btn.excluir:hover{
+    background: #b91c1c;
+
+    color: white;
+}
+
+.historico-wrapper{
+    overflow-x: auto;
+}
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+.pagina-auth{
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(1, 10, 30, 0.72),
+            rgba(1, 10, 30, 0.82)
+        ),
+        url("img/piscina-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-container{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.auth-card{
+    width: 100%;
+    max-width: 420px;
+
+    background: rgba(26, 39, 64, 0.96);
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(0, 191, 255, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.auth-card h1{
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 34px;
+}
+
+.auth-card p{
+    margin: 0;
+
+    text-align: center;
+
+    color: #9bb4d4;
+}
+
+.link-auth{
+    color: #00bfff;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+html,
+body {
+    min-height: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+
+.pagina-auth {
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+.container {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+}
+
+.usuario-logado {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    margin-bottom: -5px;
+
+    color: white;
+}
+
+.usuario-logado h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.usuario-logado a {
+    color: #00bfff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.usuario-logado a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .usuario-logado {
+        transform: translateX(0);
+        margin-bottom: 5px;
+    }
+
+    .usuario-logado h2 {
+        font-size: 15px;
+    }
+
+    .usuario-logado a {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+
+.mensagem-erro {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff6b6b;
+
+    border: 1px solid rgba(255, 77, 77, 0.35);
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.mensagem-erro {
+
+    background: rgba(255, 77, 77, 0.15);
+
+    border: 1px solid rgba(255, 77, 77, 0.4);
+
+    color: #ff6b6b;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+.auth-card button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #00bfff;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    margin-top: 10px;
+}
+
+.auth-card button:hover {
+
+    background: #0099cc;
+}
+
+@media(max-width: 768px){
+
+    .container{
+        padding: 14px;
+        gap: 18px;
+    }
+
+    .usuario-logado{
+        margin-top: 10px;
+        margin-bottom: 8px;
+        transform: none;
+    }
+
+    .cadastro-card{
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .cadastro-topo h1{
+        font-size: 26px;
+    }
+
+    .cadastro-topo p{
+        font-size: 13px;
+    }
+
+    .dashboard-cards{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dashboard-card{
+        min-height: 90px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .dashboard-card h3{
+        font-size: 32px;
+    }
+
+    .historico-topo{
+        gap: 10px;
+    }
+
+    .historico-topo h2{
+        font-size: 24px;
+    }
+
+    .historico-topo p{
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 768px){
+
+    .auth-container{
+        padding: 16px;
+    }
+
+    .auth-card{
+        width: 100%;
+        max-width: 100%;
+
+        padding: 32px 24px;
+
+        border-radius: 22px;
+
+        gap: 16px;
+
+        box-sizing: border-box;
+    }
+
+    .auth-card h1{
+        font-size: 38px;
+        line-height: 1.1;
+    }
+
+    .auth-card p{
+        font-size: 15px;
+    }
+
+    .auth-card input{
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    .auth-card button,
+    .btn-auth{
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .link-auth{
+        font-size: 15px;
+    }
+
+}
+
+.perfil-topo{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+.perfil-topo{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 12px;
+}
+
+.foto-perfil{
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 3px solid #00bfff;
+
+    box-shadow: 0 0 12px rgba(0,191,255,0.4);
+
+    display: block;
+}
+
+.perfil-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.perfil-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15, 35, 70, 0.92);
+    border: 1px solid #00bfff;
+    border-radius: 18px;
+    padding: 28px;
+    color: white;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.25);
+}
+
+.perfil-card h1 {
+    margin-bottom: 8px;
+}
+
+.perfil-card p {
+    margin-bottom: 24px;
+    color: #c7d8f2;
+}
+
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.perfil-form label {
+    color: #00bfff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.perfil-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #31456f;
+    color: white;
+    outline: none;
+}
+
+.perfil-form input::placeholder {
+    color: #b8c4d6;
+}
+
+.perfil-form button {
+    margin-top: 14px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #00bfff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.perfil-form button:hover {
+    filter: brightness(1.1);
+}
+
+.menu-usuario {
+    display: flex;
+    flex-direction: column;
+    margin-left: 48px;
+    margin-top: 6px;
+    gap: 6px;
+}
+
+.menu-usuario a {
+    color: #00bfff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.menu-usuario a:hover {
+    opacity: 0.8;
+}
