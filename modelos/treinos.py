@@ -42,7 +42,7 @@ def cadastrar_treino(
             status,
             usuario_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
 
     valores = (
@@ -73,11 +73,11 @@ def cadastrar_treino(
 
 def listar_treinos(usuario_id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
         SELECT * FROM treinos
-        WHERE usuario_id = %s
+        WHERE usuario_id = ?
         ORDER BY data_treino DESC
     """
 
@@ -92,11 +92,11 @@ def listar_treinos(usuario_id):
 
 def buscar_treino_por_id(id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
         SELECT * FROM treinos
-        WHERE id = %s
+        WHERE id = ?
     """
 
     cursor.execute(sql, (id,))
@@ -132,18 +132,18 @@ def atualizar_treino(
     sql = """
         UPDATE treinos
         SET
-            data_treino = %s,
-            titulo = %s,
-            estilo = %s,
-            tamanho_piscina = %s,
-            voltas = %s,
-            distancia_metros = %s,
-            duracao_minutos = %s,
-            pace = %s,
-            observacoes = %s,
-            equipamentos = %s,
-            status = %s
-        WHERE id = %s
+            data_treino = ?,
+            titulo = ?,
+            estilo = ?,
+            tamanho_piscina = ?,
+            voltas = ?,
+            distancia_metros = ?,
+            duracao_minutos = ?,
+            pace = ?,
+            observacoes = ?,
+            equipamentos = ?,
+            status = ?
+        WHERE id = ?
     """
 
     valores = (
@@ -174,7 +174,7 @@ def excluir_treino_por_id(id):
 
     sql = """
         DELETE FROM treinos
-        WHERE id = %s
+        WHERE id = ?
     """
 
     cursor.execute(sql, (id,))
@@ -190,7 +190,7 @@ def excluir_treino_por_id(id):
 
 def buscar_resumo(usuario_id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
         SELECT
@@ -199,7 +199,7 @@ def buscar_resumo(usuario_id):
             COALESCE(SUM(duracao_minutos), 0) AS tempo_total
         FROM treinos
         WHERE status = 'realizado'
-        AND usuario_id = %s
+        AND usuario_id = ?
     """
 
     cursor.execute(sql, (usuario_id,))
@@ -221,8 +221,8 @@ def atualizar_status_treino(id, status):
 
     sql = """
         UPDATE treinos
-        SET status = %s
-        WHERE id = %s
+        SET status = ?
+        WHERE id = ?
     """
 
     cursor.execute(sql, (status, id))
@@ -239,7 +239,7 @@ def concluir_treino_por_id(id):
     sql = """
         UPDATE treinos
         SET status = 'realizado'
-        WHERE id = %s
+        WHERE id = ?
     """
 
     cursor.execute(sql, (id,))
@@ -286,7 +286,7 @@ def cadastrar_treino_modelo(
             equipamentos,
             usuario_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
 
     valores = (
@@ -311,11 +311,11 @@ def cadastrar_treino_modelo(
 
 def listar_treinos_modelo(usuario_id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
        SELECT * FROM treinos_modelo
-       WHERE usuario_id = %s
+       WHERE usuario_id = ?
        ORDER BY criado_em DESC
     """
 
@@ -329,13 +329,13 @@ def listar_treinos_modelo(usuario_id):
 
 def buscar_treino_modelo_por_id(id, usuario_id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
         SELECT *
         FROM treinos_modelo
-        WHERE id = %s
-        AND usuario_id = %s
+        WHERE id = ?
+        AND usuario_id = ?
     """
 
     cursor.execute(sql, (id, usuario_id))
@@ -357,8 +357,8 @@ def mover_treino_programado(id, nova_data):
 
     sql = """
         UPDATE treinos
-        SET data_treino = %s
-        WHERE id = %s
+        SET data_treino = ?
+        WHERE id = ?
         AND status = 'programado'
     """
 

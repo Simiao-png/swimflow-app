@@ -79,11 +79,17 @@ def home():
     treinos_modelo = listar_treinos_modelo(usuario_id)
     resumo = buscar_resumo(usuario_id)
 
+    horas = resumo["tempo_total"] // 60
+    minutos = resumo["tempo_total"] % 60
+
+    tempo_formatado = f"{horas}h {minutos}min"
+
     return render_template(
         "index.html",
         treinos=treinos,
         treinos_modelo=treinos_modelo,
         resumo=resumo,
+        tempo_formatado=tempo_formatado,
         usuario=usuario,
         usuario_nome=usuario["nome_exibicao"] or usuario["nome"]
     )
@@ -538,8 +544,8 @@ def salvar_nova_senha():
     cursor.execute(
         """
         UPDATE usuarios
-        SET senha = %s
-        WHERE email = %s
+        SET senha = ?
+        WHERE email = ?
         """,
         (senha_hash, email)
     )

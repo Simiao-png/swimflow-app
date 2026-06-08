@@ -292,12 +292,12 @@
 
             <div class="dashboard-card">
                 <p>📏 Distância total</p>
-                <h3>{{ resumo.distancia_total }}m</h3>
+                <h3>{{ resumo.distancia_total|int }} m</h3>
             </div>
 
             <div class="dashboard-card">
                 <p>⏱ Tempo total</p>
-                <h3>{{ resumo.tempo_total }} min</h3>
+                <h3>{{ tempo_formatado }}</h3>
             </div>
 
         </section>
@@ -353,7 +353,9 @@
                             {% endif %}
                         ">
 
-                            <td>{{ treino.data_treino }}</td>
+                            <td>
+                                {{ treino.data_treino[8:10] }}/{{ treino.data_treino[5:7] }}/{{ treino.data_treino[0:4] }}
+                            </td>
 
                             <td>
                                 <a
@@ -370,7 +372,7 @@
 
                             <td>{{ treino.voltas }}</td>
 
-                            <td>{{ treino.distancia_metros }}m</td>
+                            <td>{{ treino.distancia_metros|int }}m</td>
 
                             <td>{{ treino.duracao_minutos }} min</td>
 
@@ -407,14 +409,7 @@
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
 
-                                    <a
-                                        href="/treino/{{ treino.id }}"
-                                        class="acao-btn"
-                                        title="Ver detalhes"
-                                    >
-                                         <i class="fa-solid fa-eye"></i>
-                                    </a>
-
+                                    
                                     <a
                                         href="/treino/{{ treino.id }}/editar"
                                         class="acao-btn"

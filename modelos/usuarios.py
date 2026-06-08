@@ -7,7 +7,7 @@ def cadastrar_usuario(nome, email, senha):
 
     sql = """
         INSERT INTO usuarios (nome, email, senha)
-        VALUES (%s, %s, %s)
+        VALUES (?, ?, ?)
     """
 
     valores = (nome, email, senha)
@@ -22,9 +22,9 @@ def cadastrar_usuario(nome, email, senha):
 
 def buscar_usuario_por_email(email):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
-    sql = "SELECT * FROM usuarios WHERE email = %s"
+    sql = "SELECT * FROM usuarios WHERE email = ?"
 
     cursor.execute(sql, (email,))
 
@@ -37,9 +37,9 @@ def buscar_usuario_por_email(email):
 
 def buscar_usuario_por_id(usuario_id):
     conexao = conectar()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
-    sql = "SELECT * FROM usuarios WHERE id = %s"
+    sql = "SELECT * FROM usuarios WHERE id = ?"
 
     cursor.execute(sql, (usuario_id,))
 
@@ -64,11 +64,11 @@ def atualizar_perfil(
     sql = """
         UPDATE usuarios
         SET
-            nome_exibicao = %s,
-            idade = %s,
-            peso_kg = %s,
-            altura_cm = %s
-        WHERE id = %s
+            nome_exibicao = ?,
+            idade = ?,
+            peso_kg = ?,
+            altura_cm = ?
+        WHERE id = ?
     """
 
     valores = (
