@@ -2,7 +2,19 @@
 
 Sistema web para gerenciamento e acompanhamento de treinos de natação desenvolvido com Python, Flask e MySQL.
 
-O SwimFlow permite registrar, organizar e acompanhar treinos de natação, fornecendo métricas de desempenho, histórico individual, planejamento de treinos futuros e exportação para dispositivos esportivos.
+O SwimFlow nasceu de uma necessidade real durante os treinos de natação. Diferentemente da corrida e do ciclismo, onde o GPS registra automaticamente as atividades, o ambiente da piscina dificulta a coleta precisa dos dados pelo relógio esportivo. Além disso, encontrar aplicativos simples e eficientes para registrar a evolução dos treinos de natação mostrou-se uma tarefa difícil.
+
+Diante desse problema, surgiu a ideia de desenvolver uma plataforma própria para registrar, organizar e acompanhar treinos de natação, permitindo ao atleta manter um histórico detalhado de sua evolução e exportar os treinos para plataformas esportivas compatíveis.
+
+---
+
+## 🌐 Demonstração Online
+
+Acesse a versão publicada do projeto:
+
+**https://swimflow.pythonanywhere.com**
+
+> Aplicação disponível para testes diretamente pelo navegador, sem necessidade de instalação.
 
 ---
 
@@ -16,6 +28,7 @@ O SwimFlow permite registrar, organizar e acompanhar treinos de natação, forne
 * Compatível com Garmin Connect
 * Aplicativo instalável via PWA
 * Interface responsiva para desktop e dispositivos móveis
+* Banco de dados MySQL
 
 ---
 
@@ -79,7 +92,7 @@ O SwimFlow permite registrar, organizar e acompanhar treinos de natação, forne
 ### 📤 Exportação
 
 * Exportação em formato TCX
-* Compatível com Garmin Connect e outros aplicativos esportivos
+* Compatível com Garmin Connect e outras plataformas esportivas
 
 ### 📱 Progressive Web App (PWA)
 
@@ -163,6 +176,15 @@ python app.py
 * Relatórios avançados
 * Dashboard com gráficos
 * Estatísticas por período
+* Integração direta com dispositivos esportivos
+
+---
+
+## 📌 Objetivo do Projeto
+
+O objetivo do SwimFlow é fornecer uma ferramenta simples e eficiente para que nadadores possam registrar, organizar e acompanhar sua evolução nos treinos, especialmente em situações onde dispositivos GPS e aplicativos convencionais não atendem adequadamente às necessidades da modalidade.
+
+Além da utilização prática, o projeto também representa a aplicação de conhecimentos em Python, Flask, Banco de Dados MySQL, desenvolvimento web e Progressive Web Apps (PWA).
 
 ---
 
@@ -170,4 +192,4 @@ python app.py
 
 **Silas Simião**
 
-Projeto desenvolvido para gerenciamento e acompanhamento de treinos de natação utilizando Python, Flask, MySQL e tecnologias web modernas.
+Professor de Matemática, corredor de longa distância e desenvolvedor em formação, utilizando tecnologia para solucionar problemas reais encontrados no esporte e na educação.
