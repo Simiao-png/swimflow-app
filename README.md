@@ -192,4 +192,4 @@ Além da utilização prática, o projeto também representa a aplicação de co
 
 **Silas Simião**
 
-Professor de Matemática, corredor de longa distância e desenvolvedor em formação, utilizando tecnologia para solucionar problemas reais encontrados no esporte e na educação.
+Professor de Matemática, triatleta e desenvolvedor em formação, utilizando tecnologia para solucionar problemas reais encontrados no esporte e na educação.
