@@ -1,8 +1,41 @@
 # 🏊 SwimFlow
 
-Sistema web para gerenciamento de treinos de natação desenvolvido com Python, Flask e MySQL.
+Sistema web para gerenciamento e acompanhamento de treinos de natação desenvolvido com Python, Flask e MySQL.
 
-O SwimFlow permite registrar, acompanhar e organizar treinos de natação, além de fornecer métricas e histórico individual para cada atleta.
+O SwimFlow permite registrar, organizar e acompanhar treinos de natação, fornecendo métricas de desempenho, histórico individual, planejamento de treinos futuros e exportação para dispositivos esportivos.
+
+---
+
+## 🚀 Destaques
+
+* Sistema completo de autenticação de usuários
+* Dashboard com métricas de desempenho
+* Calendário para planejamento de treinos
+* Histórico completo de atividades
+* Exportação de treinos em formato TCX
+* Compatível com Garmin Connect
+* Aplicativo instalável via PWA
+* Interface responsiva para desktop e dispositivos móveis
+
+---
+
+## 📷 Capturas de Tela
+
+### 🏠 Tela Inicial
+
+![Tela Inicial](docs/tela_inicial.png)
+
+### 📅 Calendário de Treinos
+
+![Calendário](docs/calendario.png)
+
+### 👤 Perfil do Usuário
+
+![Perfil](docs/perfil.png)
+
+### 📊 Dashboard e Histórico
+
+![Home](docs/home.png)
 
 ---
 
@@ -25,22 +58,34 @@ O SwimFlow permite registrar, acompanhar e organizar treinos de natação, além
 * Histórico completo
 * Programação de treinos futuros
 * Treinos modelo reutilizáveis
+* Marcação de treinos realizados
+* Cálculo automático de distância
+* Cálculo automático de pace
+
+### 📅 Calendário
+
+* Visualização mensal dos treinos
+* Planejamento de sessões futuras
+* Reagendamento de treinos
+* Organização visual dos treinos programados
 
 ### 📊 Dashboard
 
 * Total de treinos realizados
 * Distância total nadada
 * Tempo total de treino
-* Histórico detalhado
+* Histórico detalhado de atividades
 
-### 📅 Calendário
+### 📤 Exportação
 
-* Visualização dos treinos programados
-* Organização semanal dos treinos
+* Exportação em formato TCX
+* Compatível com Garmin Connect e outros aplicativos esportivos
 
-### 📱 Aplicativo Instalável
+### 📱 Progressive Web App (PWA)
 
-O SwimFlow pode ser instalado em dispositivos móveis e computadores através da tecnologia PWA (Progressive Web App).
+* Instalação em celulares Android
+* Instalação em computadores
+* Experiência semelhante a aplicativo nativo
 
 ---
 
@@ -59,20 +104,22 @@ O SwimFlow pode ser instalado em dispositivos móveis e computadores através da
 ## 📂 Estrutura do Projeto
 
 ```text
-natacao-app/
+swimflow-app/
 │
 ├── app.py
 ├── database/
 ├── modelos/
 ├── static/
 ├── templates/
+├── docs/
+├── requirements.txt
 ├── manifest.json
 └── service-worker.js
 ```
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Como Executar Localmente
 
 ### 1. Clonar o repositório
 
@@ -89,18 +136,18 @@ cd swimflow-app
 ### 3. Instalar dependências
 
 ```bash
-pip install flask mysql-connector-python werkzeug
+pip install -r requirements.txt
 ```
 
 ### 4. Configurar o banco de dados
 
-Criar um banco MySQL e ajustar as configurações de conexão no arquivo:
+Crie um banco MySQL e ajuste as configurações de conexão em:
 
 ```text
 database/connection.py
 ```
 
-### 5. Executar
+### 5. Executar a aplicação
 
 ```bash
 python app.py
@@ -113,13 +160,14 @@ python app.py
 * Cálculo estimado de calorias gastas
 * Cálculo de IMC
 * Evolução de peso do atleta
-* Relatórios de desempenho
-* Estatísticas avançadas
+* Relatórios avançados
+* Dashboard com gráficos
+* Estatísticas por período
 
 ---
 
 ## 👨‍💻 Autor
 
-Desenvolvido por Silas Simião.
+**Silas Simião**
 
-Projeto criado com foco em aprendizado, organização de treinos e evolução contínua do desenvolvimento de software.
+Projeto desenvolvido para gerenciamento e acompanhamento de treinos de natação utilizando Python, Flask, MySQL e tecnologias web modernas.
